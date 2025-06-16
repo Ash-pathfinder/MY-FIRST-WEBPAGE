@@ -158,6 +158,29 @@ section.visible {
     a:hover {
       text-decoration: underline;
     }
+    .project-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.project-buttons button {
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s;
+}
+
+.project-buttons button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px #00f7ff;
+}
+
   </style>
 </head>
 <body>
@@ -203,5 +226,4 @@ section.visible {
     Made with 🚀 by Ashwin – Still figuring out what to add here 🤌
   </footer>
 </body>
-<script src="script.js"></script>
 </html>
