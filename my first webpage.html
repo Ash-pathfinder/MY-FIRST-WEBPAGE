@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ashwin's Rocket Base</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="https://cdn4.iconfinder.com/data/icons/space-exploration-set/128/iStar_Design_Space_LineIcons_Live-8-128.png" type="image/png">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0d1117;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease-out;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+    header {
+      padding: 100px 20px;
+      text-align: center;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      animation: fadeIn 2s ease-out forwards;
+    }
+
+    .typewriter {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid white;
+      width: 0;
+      margin: 10px auto;
+      animation: typing 4s steps(40, end) forwards, blink 1s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    .rocket-container {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .rocket {
+      width: 80px;
+      animation: launch 4s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes launch {
+      0% {
+        transform: translateY(150px) scale(0.5);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        transform: translateY(-500px) scale(1.2);
+        opacity: 0;
+      }
+    }
+    ul li:hover {
+  background-color: #0a2245;
+  padding: 10px;
+  border-radius: 8px;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 0 10px #00f7ff;
+  cursor: pointer;
+}
+    .satellite {
+      position: absolute;
+      top: 40px;
+      left: -100px;
+      width: 50px;
+      z-index: 10;
+      animation: satelliteCruise 10s linear infinite;
+      animation-delay: 3s;
+    }
+
+    @keyframes satelliteCruise {
+      0% {
+        transform: translateX(-100px) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(110vw) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    section:nth-child(even) {
+      background: #161b22;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      background: #0d1117;
+      color: #888;
+    }
+
+    a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- 🛰️ Satellite -->
+    <img class="satellite" src="https://cdn-icons-png.flaticon.com/128/707/707538.png" alt="Satellite">
+
+    <!-- 👨‍🚀 Title and Rocket -->
+    <h1>Hello, I'm Ashwin</h1>
+    <div class="typewriter">Rocket Dev • Avionics Lead • Code Wizard</div>
+    <div class="rocket-container">
+      <img class="rocket" src="https://cdn-icons-png.flaticon.com/128/8089/8089327.png" alt="Rocket">
+    </div>
+  </header>
+
+  <section>
+    <h2>🚀 About Me</h2>
+    <p>I'm a Computer Science student with a passionate heart for aerospace. I’m currently building a flight computer, telemetry system, and onboard flight software for a 1km-range student rocket. I’ve interned at ISRO, working on their electronic checkout system.</p>
+  </section>
+
+  <section>
+    <section>
+  <h2>🛠️ Projects</h2>
+  <div class="project-buttons">
+    <button onclick="location.href='TITAN.html'"> TITAN Rocket Flight Computer</button>
+    <button onclick="location.href='UAV.html'"> AI for UAV Detection</button>
+    <button onclick="location.href='rocketpath.html'"> Rocket Path</button>
+    <button onclick="location.href='asteroid.html"> Asteroid Search Campaign</button>
+  </div>
+</section>
+
+  </section>
+
+  <section>
+    <h2>📞 Contact</h2>
+    <p>
+      📧 <a href="mailto:elonspcex2002@gmail.com">elonspcex2002@gmail.com</a><br>
+      🧑‍💻 <a href="https://github.com/OutlawGhost" target="blank">GitHub: OutlawGhost</a><br>
+      🔗 <a href="https://www.linkedin.com/in/ashwin-kumar-b-d22m03y2005" target="blank">LinkedIn: Ashwin Kumar B</a>
+    </p>
+  </section>
+  <footer>
+    Made with 🚀 by Ashwin – Still figuring out what to add here 🤌
+  </footer>
+</body>
+<script src="script.js"></script>
+</html>
