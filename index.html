@@ -244,9 +244,20 @@ section.visible {
 }
 
 .project-card:hover .overlay {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255,1 );
   color: black;
 }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=1470&q=80') no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed;
+      z-index: -1;
+      filter: brightness(0.2) blur(2px);
+    }
 
   </style>
 </head>
