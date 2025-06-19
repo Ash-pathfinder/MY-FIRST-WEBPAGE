@@ -2,79 +2,117 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ashwin's Rocket Base</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="https://cdn4.iconfinder.com/data/icons/space-exploration-set/128/iStar_Design_Space_LineIcons_Live-8-128.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Driven Drone Detection</title>
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Segoe UI', sans-serif;
-      background: hsl(218, 24%, 13%);
-      color: #e9fac4;
-      overflow-x: hidden;
+      background: linear-gradient(to right, #1e1e2f, #2c3e50);
+      color: #f2f2f2;
     }
-    section {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease-out;
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+
     header {
-      padding: 100px 20px;
       text-align: center;
-      background: linear-gradient(to right, #6f99e7, #e8b176);
-      position: relative;
-      overflow: hidden;
+      padding: 100px 20px 40px;
+      background: rgba(0, 0, 0, 0.5);
     }
-    h1 {
+
+    header h1 {
       font-size: 3rem;
       margin-bottom: 10px;
-      animation: fadeIn 2s ease-out forwards;
     }
-    .typewriter {
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 2px solid white;
-      width: 0;
-      margin: 10px auto;
-      animation: typing 4s steps(40, end) forwards, blink 1s step-end infinite;
+
+    header p {
+      font-size: 1.2rem;
+      color: #ccc;
     }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+
+    .content {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
     }
-    @keyframes blink {
-      50% { border-color: transparent }
+
+    .content h2 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      border-left: 6px solid #56cc9d;
+      padding-left: 12px;
     }
-    .rocket-container {
+
+    .description {
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+
+    .scroll-gallery {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      height: calc(100vh - 200px);
+      overflow-x: auto;
+      gap: 20px;
+      padding-bottom: 20px;
+      scroll-behavior: smooth;
     }
-    .rocket {
-      width: 150px;
-      height: auto;
+
+    .scroll-gallery::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .scroll-gallery::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+
+    .scroll-gallery img {
+      height: 250px;
+      border-radius: 12px;
+      flex-shrink: 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .scroll-gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #56cc9d;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.4);
+      color: #aaa;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Ashwin's Rocket Base</h1>
-    <div class="typewriter">Launching Dreams into Space</div>
+    <h1>🧠 AI-Driven Drone Detection</h1>
+    <p>Machine Learning + Aerospace Security • Built by Ashwin</p>
   </header>
-  <section class="rocket-container">
-    <img src="https://cdn.pixabay.com/photo/2017/08/30/07/51/rocket-2695560_1280.png" alt="Rocket" class="rocket">
-  </section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const section = document.querySelector('section');
-      section.classList.add('visible');
-    });
-  </script>
+  <div class="content">
+    <h2>Project Overview</h2>
+    <p class="description">
+      This project uses a machine learning model to identify and classify UAVs (drones) in restricted airspace using computer vision and signal features. The goal is to develop a lightweight, real-time detection system that can be integrated into civilian or military UAV defense systems.
+    </p>
+
+    <h2>Development Gallery</h2>
+    <div class="scroll-gallery">
+      <img src="images/uav1.jpg" alt="Training Data Setup">
+      <img src="images/uav2.jpg" alt="Model Training Screenshot">
+      <img src="images/uav3.jpg" alt="Hardware Detection Test">
+      <img src="images/uav4.jpg" alt="Results Dashboard">
+    </div>
+  </div>
+
+  <footer>
+    Designed by Ashwin • UAV Threat Detection • Smart Airspace Monitoring
+  </footer>
 </body>
 </html>
