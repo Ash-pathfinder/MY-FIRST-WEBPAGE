@@ -181,30 +181,19 @@
         
         /* Interactive Section Animations */
         .section-fade {
-            opacity: 0;
-            transform: translateY(50px);
+            opacity: 1;
+            transform: translateY(0);
             transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
-        .section-fade.visible {
+        .section-fade.animate-in {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .section-fade.animate-in.visible {
             opacity: 1;
             transform: translateY(0);
-        }
-        
-        .section-fade.slide-left {
-            transform: translateX(-50px);
-        }
-        
-        .section-fade.slide-left.visible {
-            transform: translateX(0);
-        }
-        
-        .section-fade.slide-right {
-            transform: translateX(50px);
-        }
-        
-        .section-fade.slide-right.visible {
-            transform: translateX(0);
         }
         
         /* Interactive Timeline */
@@ -869,12 +858,17 @@
         // Enhanced scroll animations with stagger effect
         function handleScrollAnimations() {
             const sections = document.querySelectorAll('.section-fade');
+            
+            // Make all sections visible immediately
+            sections.forEach(section => {
+                section.classList.add('visible');
+            });
+            
+            // Optional: Add intersection observer for future animations
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.classList.add('visible');
-                        }, index * 100);
+                        entry.target.classList.add('visible');
                     }
                 });
             }, { threshold: 0.1 });
@@ -1639,5 +1633,5 @@
         // Initialize the page
         document.addEventListener('DOMContentLoaded', init);
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f99970b1e07fec',t:'MTc2MzMyMzQ4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f99ef975c917b7',t:'MTc2MzMyMzcxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
