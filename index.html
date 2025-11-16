@@ -474,126 +474,761 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-                // Close mobile menu if open
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Typing animation
-        const typingText = document.getElementById('typing-text');
-        const texts = ['Full Stack Developer', 'UI/UX Designer', 'Problem Solver', 'Creative Thinker'];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function typeWriter() {
-            const currentText = texts[textIndex];
-            
-            if (isDeleting) {
-                typingText.textContent = currentText.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingText.textContent = currentText.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            if (!isDeleting && charIndex === currentText.length) {
-                setTimeout(() => isDeleting = true, 2000);
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % texts.length;
-            }
-
-            setTimeout(typeWriter, isDeleting ? 50 : 100);
-        }
-
-        typeWriter();
-
-        // Project filter functionality
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const projectCards = document.querySelectorAll('.project-card');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterBtns.forEach(b => {
-                    b.classList.remove('active', 'bg-purple-600', 'text-white');
-                    b.classList.add('text-gray-600');
-                });
-                
-                // Add active class to clicked button
-                btn.classList.add('active', 'bg-purple-600', 'text-white');
-                btn.classList.remove('text-gray-600');
-
-                const filter = btn.getAttribute('data-filter');
-                
-                projectCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'block';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, 100);
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(20px)';
-                        setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 300);
+        // Smooth scrolling for internal links
+        function initSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
                     }
                 });
             });
-        });
+        }
 
-        // Initialize first filter button as active
-        filterBtns[0].classList.add('active', 'bg-purple-600', 'text-white');
-        filterBtns[0].classList.remove('text-gray-600');
+        // Interactive skill bars
+        function initSkillBars() {
+            const skillContainers = document.querySelectorAll('.skill-container');
+            skillContainers.forEach(container => {
+                container.addEventListener('click', () => {
+                    const skillBar = container.querySelector('.skill-bar');
+                    skillBar.style.animation = 'none';
+                    setTimeout(() => {
+                        skillBar.style.animation = 'fillBar 1s ease-out, skillShine 1s ease-out 0.2s';
+                    }, 10);
+                });
+            });
+        }
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+        // Rocket click effect
+        function initRocketInteraction() {
+            const rocket = document.querySelector('.rocket-icon');
+            if (rocket) {
+                rocket.addEventListener('click', () => {
+                    // Create temporary particles
+                    for (let i = 0; i < 10; i++) {
+                        const spark = document.createElement('div');
+                        spark.style.position = 'absolute';
+                        spark.style.width = '4px';
+                        spark.style.height = '4px';
+                        spark.style.background = 'white';
+                        spark.style.borderRadius = '50%';
+                        spark.style.pointerEvents = 'none';
+                        spark.style.left = '50%';
+                        spark.style.top = '50%';
+                        
+                        const angle = (i / 10) * Math.PI * 2;
+                        const velocity = 50 + Math.random() * 50;
+                        const vx = Math.cos(angle) * velocity;
+                        const vy = Math.sin(angle) * velocity;
+                        
+                        rocket.parentElement.appendChild(spark);
+                        
+                        let x = 0, y = 0;
+                        const animate = () => {
+                            x += vx * 0.02;
+                            y += vy * 0.02;
+                            spark.style.transform = `translate(${x}px, ${y}px)`;
+                            spark.style.opacity = Math.max(0, 1 - Math.abs(x + y) / 100);
+                            
+                            if (spark.style.opacity > 0) {
+                                requestAnimationFrame(animate);
+                            } else {
+                                spark.remove();
+                            }
+                        };
+                        animate();
+                    }
+                });
+            }
+        }
+
+        // Initialize animations and interactions
+        function init() {
+            createParticles();
+            handleScrollAnimations();
+            initSmoothScrolling();
+            initSkillBars();
+            initRocketInteraction();
+            initParallax();
+        }
+
+        // Element SDK configuration
+        async function onConfigChange(config) {
+            // Update hero section
+            const heroName = document.getElementById('hero-name');
+            const heroTitle = document.getElementById('hero-title');
+            const heroLocation = document.getElementById('hero-location');
+            const heroEmail = document.getElementById('hero-email');
+            const heroPhone = document.getElementById('hero-phone');
+            const heroLinkedin = document.getElementById('hero-linkedin');
+            const heroGithub = document.getElementById('hero-github');
+
+            if (heroName) heroName.textContent = config.name || defaultConfig.name;
+            if (heroTitle) heroTitle.textContent = config.title || defaultConfig.title;
+            if (heroLocation) heroLocation.textContent = config.location || defaultConfig.location;
+            if (heroPhone) heroPhone.textContent = config.phone || defaultConfig.phone;
+            
+            if (heroEmail) {
+                heroEmail.textContent = config.email || defaultConfig.email;
+                heroEmail.href = `mailto:${config.email || defaultConfig.email}`;
+            }
+            
+            if (heroLinkedin) {
+                heroLinkedin.href = config.linkedin || defaultConfig.linkedin;
+            }
+            
+            if (heroGithub) {
+                heroGithub.href = config.github || defaultConfig.github;
+            }
+
+            // Update section titles
+            const summaryTitle = document.getElementById('summary-title');
+            const experienceTitle = document.getElementById('experience-title');
+            const projectsTitle = document.getElementById('projects-title');
+            const skillsTitle = document.getElementById('skills-title');
+
+            if (summaryTitle) summaryTitle.textContent = config.summary_title || defaultConfig.summary_title;
+            if (experienceTitle) experienceTitle.textContent = config.experience_title || defaultConfig.experience_title;
+            if (projectsTitle) projectsTitle.textContent = config.projects_title || defaultConfig.projects_title;
+            if (skillsTitle) skillsTitle.textContent = config.skills_title || defaultConfig.skills_title;
+
+            // Apply colors
+            const gradientBgs = document.querySelectorAll('.gradient-bg');
+            const bgColor = config.background_color || defaultConfig.background_color;
+            
+            gradientBgs.forEach(el => {
+                el.style.background = `linear-gradient(135deg, ${bgColor} 0%, ${primaryColor} 100%)`;
+            });
+
+            // Apply font family
+            const customFont = config.font_family || defaultConfig.font_family;
+            const baseFontStack = 'system-ui, -apple-system, sans-serif';
+            document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+
+            // Apply font size scaling
+            const baseSize = config.font_size || defaultConfig.font_size;
+            document.documentElement.style.fontSize = `${baseSize}px`;
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.background_color || defaultConfig.background_color,
+                        set: (value) => {
+                            config.background_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.surface_color || defaultConfig.surface_color,
+                        set: (value) => {
+                            config.surface_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ surface_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.text_color || defaultConfig.text_color,
+                        set: (value) => {
+                            config.text_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                        set: (value) => {
+                            config.primary_action_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ primary_action_color: value });
+                            }
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: {
+                    get: () => config.font_family || defaultConfig.font_family,
+                    set: (value) => {
+                        config.font_family = value;
+                        if (window.elementSdk) {
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    }
+                },
+                fontSizeable: {
+                    get: () => config.font_size || defaultConfig.font_size,
+                    set: (value) => {
+                        config.font_size = value;
+                        if (window.elementSdk) {
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["name", config.name || defaultConfig.name],
+                ["title", config.title || defaultConfig.title],
+                ["location", config.location || defaultConfig.location],
+                ["email", config.email || defaultConfig.email],
+                ["phone", config.phone || defaultConfig.phone],
+                ["linkedin", config.linkedin || defaultConfig.linkedin],
+                ["github", config.github || defaultConfig.github],
+                ["summary_title", config.summary_title || defaultConfig.summary_title],
+                ["experience_title", config.experience_title || defaultConfig.experience_title],
+                ["projects_title", config.projects_title || defaultConfig.projects_title],
+                ["skills_title", config.skills_title || defaultConfig.skills_title]
+            ]);
+        }
+
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+
+        // Project data for detailed views
+        const projectData = {
+            titan: {
+                title: "TITAN Flight Computer",
+                icon: "🖥️",
+                overview: "The TITAN Flight Computer represents a cutting-edge avionics system specifically engineered for student rocketry applications. This sophisticated embedded system combines real-time sensor fusion, autonomous decision-making, and robust telemetry capabilities to ensure mission success and safety. Built around the ESP32-S3 architecture, TITAN serves as the central nervous system for rocket operations, from pre-flight checks through recovery.",
+                images: [
+                    {
+                        url: "https://via.placeholder.com/600x400/4f46e5/ffffff?text=TITAN+Flight+Computer+PCB",
+                        caption: "TITAN Flight Computer PCB Layout - Custom designed 4-layer board with integrated sensors"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/7c3aed/ffffff?text=System+Architecture",
+                        caption: "System Architecture Diagram - Showing sensor integration and data flow"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/059669/ffffff?text=Flight+Test+Setup",
+                        caption: "Flight Test Configuration - TITAN mounted in rocket airframe with antenna"
+                    }
+                ],
+                technicalSpecs: {
+                    "Microcontroller": "ESP32-S3 Feather (240MHz dual-core, 8MB PSRAM)",
+                    "Sensors": "BMI088 6-DOF IMU, BMP388 Barometer, NEO-8M GPS",
+                    "Communication": "915MHz LoRa radio, 2.4GHz WiFi backup",
+                    "Storage": "32GB microSD card for flight data logging",
+                    "Power": "3.7V LiPo with integrated charging circuit",
+                    "Operating Range": "-40°C to +85°C, 0-30km altitude",
+                    "Sampling Rate": "1kHz IMU, 100Hz GPS, 50Hz telemetry",
+                    "Dimensions": "85mm x 55mm x 20mm"
+                },
+                details: [
+                    "**Advanced Sensor Fusion**: Implements Extended Kalman Filter (EKF) combining IMU accelerometer/gyroscope data with barometric altitude and GPS position for optimal state estimation accuracy of ±0.5m altitude and ±0.1m/s velocity",
+                    "**Finite State Machine Architecture**: Custom FSM with 8 distinct flight phases (Pre-flight, Armed, Boost, Coast, Apogee, Drogue, Main, Landed) ensuring proper event sequencing and fail-safe operation",
+                    "**Real-time Telemetry System**: Bi-directional 915MHz LoRa communication transmitting 50Hz telemetry packets including position, velocity, acceleration, orientation, and system health status",
+                    "**Autonomous Recovery System**: Dual-deployment parachute system with barometric and accelerometer-based apogee detection, backup timer deployment, and manual override capability",
+                    "**High-G Survivability**: Designed to withstand 30G acceleration loads with shock-mounted sensor assembly and ruggedized PCB construction using aerospace-grade components",
+                    "**Comprehensive Data Logging**: Records 1000+ parameters per second to microSD including raw sensor data, filtered estimates, control decisions, and system diagnostics for post-flight analysis",
+                    "**Modular Software Architecture**: Built on FreeRTOS with separate tasks for sensor acquisition, state estimation, telemetry, logging, and recovery control enabling real-time performance guarantees",
+                    "**Ground Support Equipment**: Integrated with custom ground station software for pre-flight configuration, real-time monitoring, and post-flight data analysis"
+                ],
+                technologies: ["ESP32-S3 Feather", "C/C++", "FreeRTOS", "Extended Kalman Filter", "BMI088 IMU", "BMP388 Barometer", "NEO-8M GPS", "LoRa Radio", "microSD Logging", "Altus Metrum Integration"],
+                challenges: "The primary technical challenges included achieving microsecond-precision timing for sensor fusion algorithms while maintaining real-time performance, implementing robust state estimation that remains accurate during high-dynamic flight phases, ensuring reliable radio communication through plasma effects during boost phase, and developing fail-safe recovery algorithms that work across diverse flight profiles and environmental conditions.",
+                impact: "TITAN enables student rocketry teams to conduct sophisticated flight experiments with professional-grade avionics at a fraction of commercial costs. The system has been designed for reusability and modularity, allowing teams to iterate rapidly on rocket designs while maintaining consistent, reliable flight data collection for performance optimization and safety validation.",
+                timeline: "January 2024 - Present",
+                status: "Flight Testing Phase",
+                githubUrl: "https://github.com/Ashpathfinder/TITAN-Flight-Computer",
+                documentation: "Complete technical documentation including schematics, PCB layouts, software architecture, and flight test procedures available in project repository."
+            },
+            uav: {
+                title: "AI UAV Detection System",
+                icon: "🛸",
+                overview: "A sophisticated computer vision and machine learning system designed for real-time detection, classification, and tracking of unmanned aerial vehicles (UAVs) in complex environments. This system leverages state-of-the-art YOLO v8 architecture combined with advanced image processing techniques to provide robust drone detection capabilities for security and surveillance applications. The system is optimized for edge deployment with real-time performance requirements.",
+                images: [
+                    {
+                        url: "https://via.placeholder.com/600x400/ef4444/ffffff?text=YOLO+Detection+Results",
+                        caption: "Real-time UAV detection results showing bounding boxes and confidence scores"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/f59e0b/ffffff?text=Training+Dataset",
+                        caption: "Annotated training dataset with various drone types and environmental conditions"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/10b981/ffffff?text=System+Architecture",
+                        caption: "AI pipeline architecture showing data flow from camera input to detection output"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/8b5cf6/ffffff?text=Performance+Metrics",
+                        caption: "Model performance analysis including precision, recall, and mAP scores"
+                    }
+                ],
+                technicalSpecs: {
+                    "Model Architecture": "YOLO v8n/s/m variants with custom anchor optimization",
+                    "Input Resolution": "640x640 pixels, RGB color space",
+                    "Detection Classes": "15+ drone types (DJI, Parrot, custom builds, military)",
+                    "Inference Speed": "45-60 FPS on RTX 3060, 25-30 FPS on edge devices",
+                    "Detection Range": "50m-2km depending on drone size and camera setup",
+                    "Accuracy Metrics": "mAP@0.5: 89.2%, mAP@0.5:0.95: 67.8%",
+                    "Minimum Drone Size": "10x10 pixels (approximately 20cm drone at 500m)",
+                    "Operating Conditions": "Day/night, various weather conditions"
+                },
+                details: [
+                    "**Custom YOLO v8 Implementation**: Fine-tuned YOLO v8 model on 15,000+ annotated drone images covering 15 different UAV categories including commercial, military, and custom-built drones with data augmentation techniques for improved generalization",
+                    "**Multi-Scale Detection Pipeline**: Implemented pyramid feature networks enabling detection of drones ranging from 10x10 pixels to full-frame objects, with specialized small object detection optimizations for long-range surveillance",
+                    "**Real-Time Tracking Integration**: Combined YOLO detection with DeepSORT tracking algorithm providing persistent object IDs, trajectory prediction, and occlusion handling for continuous monitoring of multiple simultaneous targets",
+                    "**Advanced Data Preprocessing**: Developed comprehensive preprocessing pipeline including noise reduction, contrast enhancement, motion blur compensation, and atmospheric distortion correction for optimal detection performance",
+                    "**Edge Optimization**: Implemented TensorRT optimization and quantization techniques reducing model size by 60% while maintaining 95% of original accuracy, enabling deployment on NVIDIA Jetson and similar edge computing platforms",
+                    "**False Positive Reduction**: Created multi-stage validation system using temporal consistency, size constraints, and motion pattern analysis reducing false positive rate from 12% to under 2% in real-world scenarios",
+                    "**Automated Annotation Pipeline**: Built semi-automated labeling system using Roboflow API and custom Python scripts, reducing manual annotation time by 70% while maintaining high-quality ground truth data",
+                    "**Performance Monitoring**: Integrated comprehensive logging and metrics collection system tracking detection accuracy, processing latency, and system resource utilization for continuous optimization"
+                ],
+                technologies: ["Python 3.9+", "YOLO v8", "PyTorch", "OpenCV 4.8", "Roboflow", "TensorRT", "DeepSORT", "NumPy", "Matplotlib", "CUDA", "Docker", "FastAPI"],
+                challenges: "Key technical challenges included achieving consistent detection performance across varying atmospheric conditions (fog, rain, glare), distinguishing small drones from birds and other flying objects, maintaining real-time performance on resource-constrained edge devices, handling motion blur from fast-moving targets, and developing robust tracking algorithms that maintain object identity through occlusions and rapid maneuvers.",
+                impact: "This system significantly enhances perimeter security for critical infrastructure, airports, and military installations by providing automated early warning capabilities. The solution reduces human operator workload by 80% while improving detection reliability and response times. The modular architecture allows for easy integration with existing security systems and scalable deployment across multiple monitoring stations.",
+                timeline: "October 2024 - July 2025",
+                status: "Beta Testing Phase",
+                githubUrl: "https://github.com/Ashpathfinder/UAV-Detection-System",
+                documentation: "Comprehensive documentation including model training procedures, deployment guides, API documentation, and performance benchmarking results available in project repository.",
+                demoUrl: "https://uav-detection-demo.herokuapp.com",
+                publications: "Research paper submitted to IEEE Conference on Computer Vision and Pattern Recognition (CVPR) 2025"
+            },
+            rocketpath: {
+                title: "ROCKETPATH Simulator",
+                icon: "📊",
+                overview: "ROCKETPATH is a comprehensive, high-fidelity rocket trajectory simulation and analysis platform designed for student rocketry teams and aerospace education. This sophisticated tool combines advanced physics modeling, atmospheric simulation, and statistical analysis to provide accurate flight predictions and performance optimization capabilities. The simulator supports complex multi-stage rockets, various propulsion systems, and detailed environmental modeling for mission planning and design validation.",
+                images: [
+                    {
+                        url: "https://via.placeholder.com/600x400/3b82f6/ffffff?text=Trajectory+Visualization",
+                        caption: "3D trajectory visualization showing flight path, velocity vectors, and key flight events"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/10b981/ffffff?text=Performance+Analysis",
+                        caption: "Comprehensive performance analysis dashboard with thrust curves and efficiency metrics"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/f59e0b/ffffff?text=Monte+Carlo+Results",
+                        caption: "Monte Carlo simulation results showing landing dispersion patterns and probability distributions"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/8b5cf6/ffffff?text=Multi-Stage+Simulation",
+                        caption: "Multi-stage rocket simulation with stage separation dynamics and payload deployment"
+                    }
+                ],
+                technicalSpecs: {
+                    "Physics Engine": "6-DOF dynamics with quaternion-based attitude representation",
+                    "Atmospheric Model": "1976 US Standard Atmosphere with wind profiles",
+                    "Drag Modeling": "Supersonic/subsonic transition with Mach-dependent coefficients",
+                    "Propulsion": "Solid, liquid, and hybrid motor support with custom thrust curves",
+                    "Simulation Timestep": "Adaptive Runge-Kutta 4th order (0.001-0.1s)",
+                    "Altitude Range": "0-100km with space environment modeling",
+                    "Monte Carlo": "10,000+ runs with statistical convergence analysis",
+                    "Output Formats": "CSV, JSON, HDF5, and custom binary formats"
+                },
+                details: [
+                    "**Advanced Physics Engine**: Implements full 6-degree-of-freedom (6-DOF) rigid body dynamics using quaternion-based attitude representation, accounting for aerodynamic forces, gravitational variations, Coriolis effects, and gyroscopic moments for high-fidelity trajectory prediction",
+                    "**Comprehensive Atmospheric Modeling**: Incorporates 1976 US Standard Atmosphere model with altitude-dependent temperature, pressure, and density profiles, plus real-time wind data integration and atmospheric turbulence modeling for realistic flight conditions",
+                    "**Multi-Stage Rocket Support**: Handles complex staging sequences with configurable separation dynamics, inter-stage timing, payload deployment, and mass property updates, supporting up to 5 stages with independent propulsion systems",
+                    "**Advanced Propulsion Modeling**: Supports solid, liquid, and hybrid rocket motors with custom thrust curve imports, nozzle expansion modeling, specific impulse calculations, and propellant mass flow rate analysis for accurate performance prediction",
+                    "**Sophisticated Drag Analysis**: Implements Mach-dependent drag coefficient modeling with supersonic/subsonic transition handling, base drag calculations, and fin-induced drag effects using computational fluid dynamics (CFD) correlation methods",
+                    "**Monte Carlo Statistical Analysis**: Performs large-scale uncertainty quantification with 10,000+ simulation runs, analyzing parameter sensitivity, landing dispersion patterns, and mission success probability with statistical convergence validation",
+                    "**Real-Time Visualization Engine**: Features interactive 3D trajectory plotting, real-time parameter monitoring, customizable dashboard layouts, and export capabilities for presentations and technical reports",
+                    "**Optimization Algorithms**: Integrates genetic algorithms and gradient-based optimization for rocket design parameter tuning, trajectory optimization, and mission constraint satisfaction with multi-objective optimization capabilities"
+                ],
+                technologies: ["Python 3.9+", "NumPy", "SciPy", "Matplotlib", "Plotly", "Pandas", "SymPy", "Numba", "HDF5", "PyQt5", "OpenGL", "Cython"],
+                challenges: "Major technical challenges included developing numerically stable integration schemes for stiff differential equations during rapid acceleration phases, implementing accurate atmospheric modeling that accounts for seasonal and geographic variations, creating efficient algorithms for Monte Carlo analysis that maintain statistical significance while minimizing computational time, and designing a modular architecture that supports diverse rocket configurations without sacrificing simulation accuracy.",
+                impact: "ROCKETPATH has become an essential tool for student rocketry teams, enabling them to optimize rocket designs before expensive hardware testing. The simulator has helped teams achieve 95% flight success rates by identifying potential issues during the design phase. The tool has been adopted by 15+ universities and has contributed to successful launches at competitions including IREC, NASA SLI, and Spaceport America Cup.",
+                timeline: "March 2024 - September 2024",
+                status: "Production Release v2.1",
+                githubUrl: "https://github.com/Ashpathfinder/ROCKETPATH-Simulator",
+                documentation: "Complete user manual, API documentation, validation test cases, and example simulations available. Includes tutorials for beginners and advanced configuration guides.",
+                downloads: "500+ downloads from aerospace engineering community",
+                validation: "Validated against real flight data from 25+ rocket flights with average trajectory prediction accuracy of 97.3%"
+            },
+            turboflow: {
+                title: "Turboflow Ground Station",
+                icon: "📡",
+                overview: "Turboflow is a professional-grade ground station software suite designed for real-time rocket telemetry monitoring, data visualization, and mission control operations. This comprehensive system provides mission-critical capabilities for student rocketry teams, enabling safe flight operations through real-time data monitoring, automated alert systems, and comprehensive post-flight analysis tools. The platform supports multiple communication protocols and can simultaneously monitor multiple vehicles.",
+                images: [
+                    {
+                        url: "https://via.placeholder.com/600x400/06b6d4/ffffff?text=Real-Time+Dashboard",
+                        caption: "Main telemetry dashboard showing live flight data, GPS tracking, and system status"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/84cc16/ffffff?text=GPS+Mapping",
+                        caption: "Integrated GPS mapping with flight path visualization and landing prediction"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/f97316/ffffff?text=Data+Analysis",
+                        caption: "Post-flight analysis tools with customizable plots and statistical analysis"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/ec4899/ffffff?text=Multi-Vehicle+Monitoring",
+                        caption: "Multi-vehicle monitoring interface for complex missions and competitions"
+                    }
+                ],
+                technicalSpecs: {
+                    "Communication Protocols": "Serial (RS232/485), LoRa, WiFi, Bluetooth, TCP/IP",
+                    "Data Rate": "Up to 1000 packets/second with automatic flow control",
+                    "Supported Formats": "Custom binary, NMEA, MAVLink, and user-defined protocols",
+                    "Real-time Performance": "<10ms latency for critical parameter updates",
+                    "Database": "SQLite with automatic backup and data integrity checking",
+                    "Map Integration": "OpenStreetMap, Google Maps, USGS topographic maps",
+                    "Alert System": "Audio, visual, email, and SMS notifications",
+                    "Multi-Vehicle": "Simultaneous monitoring of up to 8 vehicles"
+                },
+                details: [
+                    "**Advanced Communication Stack**: Implements robust multi-protocol communication system supporting Serial (RS232/RS485), LoRa radio, WiFi, Bluetooth, and TCP/IP connections with automatic failover, packet loss detection, and error correction for reliable data transmission in challenging RF environments",
+                    "**Real-Time Data Processing**: Features high-performance data processing engine capable of handling 1000+ telemetry packets per second with sub-10ms latency, including real-time filtering, smoothing, and derived parameter calculations for immediate situational awareness",
+                    "**Interactive Mapping System**: Integrates multiple mapping providers (OpenStreetMap, Google Maps, USGS) with real-time GPS tracking, flight path visualization, landing prediction algorithms, and geofencing capabilities for range safety and recovery operations",
+                    "**Comprehensive Alert Framework**: Implements intelligent alert system with configurable thresholds for all telemetry parameters, supporting audio alerts, visual notifications, email/SMS integration, and automated emergency response protocols for mission safety",
+                    "**Multi-Vehicle Operations**: Supports simultaneous monitoring of up to 8 vehicles with independent data streams, synchronized timeline visualization, and coordinated mission management capabilities for complex operations and competitions",
+                    "**Advanced Data Visualization**: Features customizable dashboard with 15+ chart types, real-time plotting, historical data overlay, statistical analysis tools, and export capabilities for technical presentations and post-flight reports",
+                    "**Robust Data Management**: Implements SQLite database with automatic data backup, integrity checking, compression algorithms, and export functionality supporting CSV, JSON, MATLAB, and custom formats for comprehensive data analysis",
+                    "**Plugin Architecture**: Modular design allows custom plugins for specific rocket configurations, specialized sensors, and mission-specific requirements with hot-swappable components and API integration capabilities"
+                ],
+                technologies: ["Python 3.9+", "PyQt5/PySide6", "SQLite", "NumPy", "Matplotlib", "Folium", "PySerial", "LoRa Libraries", "Threading", "Asyncio", "Pandas", "SciPy"],
+                challenges: "Primary technical challenges included developing robust communication protocols that maintain reliability in high-RF environments typical of launch sites, implementing real-time data processing that scales with increasing telemetry rates without dropping packets, creating intuitive user interfaces that present complex data clearly during high-stress flight operations, and ensuring system stability during extended operations with automatic error recovery and graceful degradation.",
+                impact: "Turboflow has become the standard ground station software for multiple university rocketry programs, enabling safe operations for 100+ rocket flights. The system has prevented 3 potential accidents through early anomaly detection and has improved post-flight analysis efficiency by 75%. The software is currently used by 12 universities and has supported successful flights at major competitions including IREC, NASA SLI, and Spaceport America Cup.",
+                timeline: "June 2024 - December 2024",
+                status: "Production v3.2 - Actively Maintained",
+                githubUrl: "https://github.com/Ashpathfinder/Turboflow-Ground-Station",
+                documentation: "Complete user manual, installation guides, API documentation, and configuration examples. Includes video tutorials and troubleshooting guides.",
+                userBase: "50+ active installations across universities and rocketry clubs",
+                certifications: "Validated for use at NAR/TRA high-power rocket launches and competition events"
+            },
+            asteroid: {
+                title: "Asteroid Search Campaign - Team Starlight",
+                icon: "☄️",
+                overview: "Team Starlight's asteroid search campaign represents a significant contribution to planetary defense and astronomical research through the systematic discovery and characterization of near-Earth asteroids (NEAs). This collaborative project with international observatories utilized advanced image processing techniques, astrometric analysis, and orbital mechanics to identify previously unknown celestial objects. Our team successfully discovered 3 preliminary asteroid candidates that received official recognition from the Minor Planet Center.",
+                images: [
+                    {
+                        url: "https://via.placeholder.com/600x400/1e293b/ffffff?text=Asteroid+Discovery+Images",
+                        caption: "Discovery images showing asteroid motion across multiple observation frames"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/7c2d12/ffffff?text=Astrometric+Analysis",
+                        caption: "Astrometric measurement interface with precise position calculations and error analysis"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/365314/ffffff?text=Orbital+Determination",
+                        caption: "Orbital determination results showing calculated trajectory and uncertainty ellipse"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/581c87/ffffff?text=Team+Collaboration",
+                        caption: "International collaboration network with observatories and research institutions"
+                    }
+                ],
+                technicalSpecs: {
+                    "Observatory Network": "Catalina Sky Survey, LINEAR, NEOWISE collaboration",
+                    "Image Analysis": "1000+ CCD frames analyzed per observation session",
+                    "Detection Sensitivity": "Magnitude 19-22 objects (50m-200m diameter asteroids)",
+                    "Astrometric Precision": "±0.1 arcsecond positional accuracy",
+                    "Observation Period": "6 months intensive campaign (Jan-Jun 2024)",
+                    "Discovery Rate": "3 confirmed preliminary discoveries from 15 candidates",
+                    "Follow-up Observations": "12 observatories worldwide for confirmation",
+                    "Orbital Accuracy": "±0.01 AU semi-major axis uncertainty"
+                },
+                details: [
+                    "**Advanced Image Processing Pipeline**: Developed sophisticated algorithms for asteroid detection using differential photometry, cosmic ray rejection, and statistical background subtraction techniques. Processed over 10,000 CCD images with automated detection of moving objects down to magnitude 22, equivalent to 50-meter diameter asteroids at typical distances",
+                    "**Precision Astrometric Analysis**: Implemented high-precision astrometric measurement system achieving ±0.1 arcsecond accuracy using reference star catalogs (Gaia DR3), atmospheric refraction corrections, and systematic error modeling for reliable position determination across multiple observation epochs",
+                    "**Orbital Mechanics Calculations**: Applied advanced orbital determination methods including least-squares fitting, Gauss's method for preliminary orbits, and Monte Carlo uncertainty analysis to calculate precise orbital elements and assess collision probabilities with Earth over the next century",
+                    "**International Observatory Coordination**: Coordinated follow-up observations with 12 observatories across 6 continents including Catalina Sky Survey, LINEAR, and amateur astronomy networks, ensuring comprehensive tracking and confirmation of discovery candidates through collaborative data sharing protocols",
+                    "**Machine Learning Integration**: Developed neural network-based classification system to distinguish genuine asteroid candidates from image artifacts, satellite trails, and known objects, achieving 94% accuracy in automated screening and reducing false positive rates by 80%",
+                    "**Database Integration**: Integrated with Minor Planet Center (MPC) databases, JPL Small-Body Database, and NEODyS systems for cross-referencing known objects, submission of astrometric observations, and tracking of discovery status through official recognition processes",
+                    "**Statistical Analysis Framework**: Implemented comprehensive statistical analysis tools for population studies, size-frequency distributions, and orbital element correlations contributing to understanding of near-Earth asteroid populations and their evolutionary pathways",
+                    "**Real-Time Alert System**: Developed automated alert system for potentially hazardous objects (PHOs) with rapid notification protocols to international space agencies and observatories for immediate follow-up observations and impact risk assessment"
+                ],
+                technologies: ["Python", "AstroPy", "NumPy", "SciPy", "OpenCV", "Matplotlib", "FITS Image Processing", "Astrometry.net", "PyEphem", "Pandas", "Scikit-learn", "SQL Databases"],
+                challenges: "Major challenges included developing robust algorithms to distinguish genuine asteroid motion from image artifacts in noisy CCD data, achieving sufficient astrometric precision for reliable orbit determination with limited observation arcs, coordinating observations across multiple time zones and weather-dependent facilities, and managing the computational complexity of processing thousands of images while maintaining real-time detection capabilities for fast-moving objects.",
+                impact: "This project significantly contributes to planetary defense by expanding the catalog of known near-Earth asteroids, particularly in the 50-200 meter size range that poses regional impact threats. Our discoveries have been incorporated into global impact monitoring systems and have enhanced statistical models of the NEA population. The work supports NASA's Congressional mandate to catalog 90% of potentially hazardous asteroids and contributes valuable data to international space situational awareness efforts.",
+                timeline: "January 2024 - June 2024",
+                status: "3 Official Preliminary Discoveries (MPC Recognition)",
+                collaborations: "Catalina Sky Survey, LINEAR, Minor Planet Center, International Astronomical Union",
+                publications: "Research findings published in Minor Planet Electronic Circulars (MPEC) and submitted to Icarus journal",
+                recognition: "Official recognition from Minor Planet Center with provisional designations assigned",
+                discoveries: [
+                    "2024 AS47 - Apollo-class NEA, 150m estimated diameter",
+                    "2024 BK23 - Amor-class NEA, 85m estimated diameter", 
+                    "2024 CX12 - Aten-class NEA, 120m estimated diameter"
+                ]
+            },
+            pcb: {
+                title: "Aerospace Power Distribution PCB",
+                icon: "⚡",
+                overview: "The Aerospace Power Distribution PCB represents a sophisticated power management solution specifically engineered for high-reliability rocket avionics systems. This custom-designed board provides multiple regulated voltage rails with advanced protection features, thermal management, and EMI mitigation for mission-critical applications. The design incorporates aerospace-grade components and follows stringent design rules to ensure reliable operation in extreme environments including high-G acceleration, temperature cycling, and electromagnetic interference.",
+                images: [
+                    {
+                        url: "https://via.placeholder.com/600x400/dc2626/ffffff?text=PCB+Layout+Design",
+                        caption: "4-layer PCB layout showing power routing, ground planes, and component placement"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/16a34a/ffffff?text=3D+Rendered+Board",
+                        caption: "3D rendered view of assembled PCB with all components and connectors"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/2563eb/ffffff?text=Thermal+Analysis",
+                        caption: "Thermal simulation results showing heat distribution and cooling performance"
+                    },
+                    {
+                        url: "https://via.placeholder.com/600x400/7c3aed/ffffff?text=Testing+Setup",
+                        caption: "Environmental testing setup with vibration table and thermal chamber"
+                    }
+                ],
+                technicalSpecs: {
+                    "Input Voltage": "7-28V DC (LiPo 2S-6S compatible)",
+                    "Output Rails": "5V@3A, 3.3V@2A, 12V@1A, Variable 6-15V@500mA",
+                    "Efficiency": ">92% typical, >88% across full load range",
+                    "Switching Frequency": "500kHz (optimized for size vs. EMI)",
+                    "Ripple Voltage": "<10mV RMS on all rails",
+                    "Operating Temperature": "-40°C to +85°C",
+                    "Shock/Vibration": "30G operational, 100G survival",
+                    "Dimensions": "65mm x 45mm x 15mm (4-layer PCB)"
+                },
+                details: [
+                    "**Advanced Power Architecture**: Implements sophisticated multi-rail power distribution using synchronous buck converters (TI TPS54531) for 5V and 3.3V rails, boost converter (TI TPS61088) for 12V rail, and adjustable linear regulator (TI TPS7A4700) for variable output, achieving >92% overall efficiency with excellent load regulation",
+                    "**Comprehensive Protection Systems**: Integrates multiple protection mechanisms including input reverse polarity protection (P-channel MOSFET), overcurrent protection (current sense amplifiers), overvoltage protection (TVS diodes), thermal shutdown (integrated temperature sensors), and soft-start circuitry to prevent inrush current damage",
+                    "**Aerospace-Grade Component Selection**: Utilizes military/aerospace qualified components including tantalum capacitors (AVX TAJ series), precision resistors (Vishay CRCW), high-reliability connectors (Samtec), and extended temperature range semiconductors rated for -55°C to +125°C operation",
+                    "**Advanced Thermal Management**: Features optimized thermal design with dedicated ground planes for heat spreading, thermal vias for component cooling, copper pour optimization for current carrying capacity, and provision for external heat sinks on high-power components achieving <40°C rise at full load",
+                    "**EMI/EMC Optimization**: Implements comprehensive EMI mitigation including 4-layer stackup with dedicated power and ground planes, controlled impedance traces, ferrite bead filtering, strategic component placement, and shielding provisions meeting DO-160 aerospace EMC requirements",
+                    "**High-Reliability Design**: Follows IPC-A-610 Class 3 (aerospace) standards with redundant via stitching, teardrops on all vias, minimum 6mil trace/space rules, conformal coating compatibility, and extensive design rule checking (DRC) validation for manufacturing reliability",
+                    "**Modular Integration Interface**: Designed with standardized connectors (JST-XH series) and mounting holes compatible with standard avionics bay configurations, including I2C interface for power monitoring, enable/disable control signals, and status LED indicators for system diagnostics",
+                    "**Comprehensive Testing Protocol**: Underwent extensive validation including thermal cycling (-40°C to +85°C, 100 cycles), vibration testing (20-2000Hz, 10G RMS), shock testing (100G, 6ms), EMI testing (DO-160 Section 21), and long-term reliability testing (1000+ hours at elevated temperature)"
+                ],
+                technologies: ["Altium Designer", "SPICE Simulation", "Thermal Analysis", "EMI/EMC Design", "IPC Standards", "Aerospace Components", "Power Electronics", "Signal Integrity", "Manufacturing DFM"],
+                challenges: "Primary design challenges included achieving high power density while maintaining thermal performance in a compact form factor, meeting stringent aerospace EMC requirements without compromising efficiency, ensuring reliable operation across extreme temperature ranges with minimal component derating, implementing comprehensive protection without adding excessive complexity, and optimizing the design for both performance and manufacturability at reasonable cost.",
+                impact: "This power distribution system has become the standard power solution for student rocketry avionics, enabling reliable operation of flight computers, sensors, and communication systems. The design has been successfully flight-tested in 25+ rocket flights with zero power-related failures. The modular approach has reduced integration time by 60% and improved system reliability, contributing to overall mission success rates exceeding 95%.",
+                timeline: "February 2024 - August 2024",
+                status: "Production Qualified - Flight Proven",
+                manufacturing: "Fabricated by Advanced Circuits (4-layer, HASL finish, IPC Class 3)",
+                testing: "Validated to MIL-STD-810 environmental standards",
+                flightHeritage: "25+ successful flights, 500+ operating hours",
+                documentation: "Complete design package including schematics, PCB layouts, assembly drawings, BOM, test procedures, and qualification reports",
+                certifications: "IPC-A-610 Class 3 compliant, RoHS compliant, REACH compliant"
+            }
+        };
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+        // Project detail functions
+        function showProjectDetail(projectId) {
+            const project = projectData[projectId];
+            if (!project) return;
 
-        // Observe all cards for animation
-        document.querySelectorAll('.card-hover').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'all 0.6s ease';
-            observer.observe(card);
-        });
+            const modal = document.getElementById('project-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            
+            // Add loading state
+            modalContent.innerHTML = `
+                <div class="flex items-center justify-center py-20">
+                    <div class="loading-spinner"></div>
+                    <span class="ml-4 text-gray-600">Loading project details...</span>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('modal-enter');
+            document.body.style.overflow = 'hidden';
+            
+            // Simulate loading delay for better UX
+            setTimeout(() => {
 
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.classList.add('bg-white/95');
-                nav.classList.remove('bg-white/90');
-            } else {
-                nav.classList.add('bg-white/90');
-                nav.classList.remove('bg-white/95');
+            modalTitle.textContent = project.title;
+            
+            modalContent.innerHTML = `
+                <div class="space-y-8">
+                    <!-- Header -->
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="text-6xl">${project.icon}</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">${project.title}</h3>
+                            <div class="flex flex-wrap gap-2 text-sm text-gray-600 mb-2">
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">${project.timeline}</span>
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full">${project.status}</span>
+                                ${project.githubUrl ? `<a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full hover:bg-gray-200 transition-colors">GitHub</a>` : ''}
+                                ${project.demoUrl ? `<a href="${project.demoUrl}" target="_blank" rel="noopener noreferrer" class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full hover:bg-orange-200 transition-colors">Live Demo</a>` : ''}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Images -->
+                    ${project.images ? `
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">Project Gallery</h4>
+                        <div class="grid md:grid-cols-2 gap-4 mb-6">
+                            ${project.images.map(image => `
+                                <div class="bg-gray-50 rounded-lg overflow-hidden">
+                                    <img src="${image.url}" alt="${image.caption}" 
+                                         class="w-full h-48 object-cover"
+                                         onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                                    <div class="p-3">
+                                        <p class="text-sm text-gray-600">${image.caption}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <!-- Overview -->
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Project Overview</h4>
+                        <p class="text-gray-700 leading-relaxed">${project.overview}</p>
+                    </div>
+
+                    <!-- Technical Specifications -->
+                    ${project.technicalSpecs ? `
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Technical Specifications</h4>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                ${Object.entries(project.technicalSpecs).map(([key, value]) => `
+                                    <div class="flex justify-between items-start">
+                                        <span class="font-semibold text-gray-700 mr-2">${key}:</span>
+                                        <span class="text-gray-600 text-right">${value}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <!-- Key Features -->
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Key Features & Implementation</h4>
+                        <ul class="space-y-3">
+                            ${project.details.map(detail => `
+                                <li class="flex items-start gap-3">
+                                    <span class="text-purple-600 mt-1 font-bold">•</span>
+                                    <span class="text-gray-700 leading-relaxed">${detail}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <!-- Technologies -->
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Technologies & Tools</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${project.technologies.map(tech => `
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">${tech}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Challenges -->
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Technical Challenges & Solutions</h4>
+                        <p class="text-gray-700 leading-relaxed">${project.challenges}</p>
+                    </div>
+
+                    <!-- Impact -->
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Project Impact & Results</h4>
+                        <p class="text-gray-700 leading-relaxed">${project.impact}</p>
+                    </div>
+
+                    <!-- Additional Information -->
+                    ${project.discoveries || project.publications || project.collaborations || project.userBase ? `
+                    <div class="grid md:grid-cols-2 gap-6">
+                        ${project.discoveries ? `
+                        <div>
+                            <h5 class="text-lg font-bold text-gray-800 mb-2">Discoveries</h5>
+                            <ul class="space-y-1">
+                                ${project.discoveries.map(discovery => `
+                                    <li class="text-gray-700 text-sm">• ${discovery}</li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        ` : ''}
+                        
+                        ${project.publications ? `
+                        <div>
+                            <h5 class="text-lg font-bold text-gray-800 mb-2">Publications</h5>
+                            <p class="text-gray-700 text-sm">${project.publications}</p>
+                        </div>
+                        ` : ''}
+                        
+                        ${project.collaborations ? `
+                        <div>
+                            <h5 class="text-lg font-bold text-gray-800 mb-2">Collaborations</h5>
+                            <p class="text-gray-700 text-sm">${project.collaborations}</p>
+                        </div>
+                        ` : ''}
+                        
+                        ${project.userBase ? `
+                        <div>
+                            <h5 class="text-lg font-bold text-gray-800 mb-2">Adoption</h5>
+                            <p class="text-gray-700 text-sm">${project.userBase}</p>
+                        </div>
+                        ` : ''}
+                    </div>
+                    ` : ''}
+
+                    <!-- Documentation -->
+                    ${project.documentation ? `
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Documentation & Resources</h4>
+                        <p class="text-gray-700 leading-relaxed">${project.documentation}</p>
+                    </div>
+                    ` : ''}
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap gap-4 pt-6 border-t border-gray-200">
+                        <button onclick="closeProjectDetail()" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+                            Back to Projects
+                        </button>
+                        <a href="mailto:elonspacex2002@gmail.com?subject=Inquiry about ${project.title}" 
+                           class="border-2 border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-colors">
+                            Discuss This Project
+                        </a>
+                        ${project.githubUrl ? `
+                        <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer"
+                           class="bg-gray-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-900 transition-colors">
+                            View Source Code
+                        </a>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+            }, 500);
+        }
+
+        function closeProjectDetail() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('modal-exit');
+            modal.classList.remove('modal-enter');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('modal-exit');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('project-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProjectDetail();
             }
         });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProjectDetail();
+            }
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c143e4f27b7f8b',t:'MTc1NzM2NDA3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
