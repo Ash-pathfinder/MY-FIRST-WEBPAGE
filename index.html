@@ -588,10 +588,8 @@
      <div class="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
       <h2 id="modal-title" class="text-3xl font-bold text-gray-800"></h2><button onclick="closeProjectDetail()" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
      </div>
-     <div id="modal-content" class="p-6"><!-- Content will be dynamically loaded -->
-     </div>
     </div>
-   </section><!-- Achievements & Interests -->
+   </div><!-- Achievements & Interests -->
    <section class="py-16 px-6 bg-gray-50">
     <div class="max-w-6xl mx-auto">
      <div class="section-fade">
@@ -689,7 +687,6 @@
             summary_title: "Professional Summary",
             experience_title: "Experience",
             projects_title: "Featured Projects",
-            skills_title: "Technical Skills",
             background_color: "#667eea",
             surface_color: "#ffffff",
             text_color: "#374151",
@@ -864,12 +861,10 @@
             const summaryTitle = document.getElementById('summary-title');
             const experienceTitle = document.getElementById('experience-title');
             const projectsTitle = document.getElementById('projects-title');
-            const skillsTitle = document.getElementById('skills-title');
 
             if (summaryTitle) summaryTitle.textContent = config.summary_title || defaultConfig.summary_title;
             if (experienceTitle) experienceTitle.textContent = config.experience_title || defaultConfig.experience_title;
             if (projectsTitle) projectsTitle.textContent = config.projects_title || defaultConfig.projects_title;
-            if (skillsTitle) skillsTitle.textContent = config.skills_title || defaultConfig.skills_title;
 
             // Apply colors
             const gradientBgs = document.querySelectorAll('.gradient-bg');
@@ -963,8 +958,7 @@
                 ["github", config.github || defaultConfig.github],
                 ["summary_title", config.summary_title || defaultConfig.summary_title],
                 ["experience_title", config.experience_title || defaultConfig.experience_title],
-                ["projects_title", config.projects_title || defaultConfig.projects_title],
-                ["skills_title", config.skills_title || defaultConfig.skills_title]
+                ["projects_title", config.projects_title || defaultConfig.projects_title]
             ]);
         }
 
