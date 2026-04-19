@@ -1,1637 +1,626 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-full">
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ashwin Kumar - Aerospace &amp; AI Portfolio</title>
+  <title>Ashwin Kumar B — Portfolio</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <script src="/_sdk/element_sdk.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        outfit: ['Outfit', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace']
+      }
+    }
+  }
+}
+</script>
   <style>
-        body {
-            box-sizing: border-box;
-            overflow-x: hidden;
-        }
-        
-        /* Advanced Background Effects */
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .gradient-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.5" fill="white" opacity="0.3"/><circle cx="15" cy="8" r="0.3" fill="white" opacity="0.5"/><circle cx="8" cy="15" r="0.4" fill="white" opacity="0.4"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
-            animation: starfield 20s linear infinite;
-            pointer-events: none;
-        }
-        
-        @keyframes starfield {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-100px); }
-        }
-        
-        /* Interactive Particles */
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            animation: particleFloat 15s infinite linear;
-        }
-        
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(100vh) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) translateX(100px);
-                opacity: 0;
-            }
-        }
-        
-        /* Enhanced Card Interactions */
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card-hover::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-        }
-        
-        .card-hover:hover::before {
-            left: 100%;
-        }
-        
-        /* Interactive Skill Bars */
-        .skill-container {
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .skill-bar {
-            height: 8px;
-            background: linear-gradient(90deg, #4f46e5, #7c3aed);
-            border-radius: 4px;
-            animation: fillBar 2s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .skill-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: skillShine 2s ease-out 0.5s;
-        }
-        
-        @keyframes fillBar {
-            from { width: 0%; }
-        }
-        
-        @keyframes skillShine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-        
-        .skill-container:hover .skill-bar {
-            animation: skillPulse 1s ease-in-out infinite alternate;
-        }
-        
-        @keyframes skillPulse {
-            0% { box-shadow: 0 0 5px rgba(79, 70, 229, 0.3); }
-            100% { box-shadow: 0 0 20px rgba(79, 70, 229, 0.6); }
-        }
-        
-        /* Advanced Floating Animation */
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-15px) rotate(2deg); }
-            50% { transform: translateY(-10px) rotate(0deg); }
-            75% { transform: translateY(-20px) rotate(-2deg); }
-        }
-        
-        /* Enhanced Rocket Animation */
-        .rocket-icon {
-            animation: rocket 4s ease-in-out infinite;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .rocket-icon:hover {
-            animation: rocketBoost 0.5s ease-out;
-            transform: scale(1.2);
-        }
-        
-        @keyframes rocket {
-            0%, 100% { transform: rotate(0deg) translateY(0px); }
-            25% { transform: rotate(5deg) translateY(-8px); }
-            50% { transform: rotate(0deg) translateY(-15px); }
-            75% { transform: rotate(-5deg) translateY(-8px); }
-        }
-        
-        @keyframes rocketBoost {
-            0% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.3) rotate(10deg); }
-            100% { transform: scale(1.2) rotate(0deg); }
-        }
-        
-        /* Interactive Section Animations */
-        .section-fade {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        .section-fade.animate-in {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        
-        .section-fade.animate-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Interactive Timeline */
-        .timeline-item {
-            position: relative;
-            padding-left: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .timeline-item:hover {
-            transform: translateX(10px);
-        }
-        
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 8px;
-            width: 12px;
-            height: 12px;
-            background: #4f46e5;
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 3px #4f46e5;
-            transition: all 0.3s ease;
-        }
-        
-        .timeline-item:hover::before {
-            transform: scale(1.3);
-            box-shadow: 0 0 0 6px rgba(79, 70, 229, 0.3);
-        }
-        
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            left: 5px;
-            top: 20px;
-            width: 2px;
-            height: calc(100% - 12px);
-            background: linear-gradient(to bottom, #4f46e5, transparent);
-            transition: all 0.3s ease;
-        }
-        
-        .timeline-item:hover::after {
-            background: linear-gradient(to bottom, #7c3aed, #4f46e5);
-            width: 4px;
-            left: 4px;
-        }
-        
-        .timeline-item:last-child::after {
-            display: none;
-        }
-        
-        /* Interactive Project Cards */
-        .project-card {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .project-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(79, 70, 229, 0.1), rgba(124, 58, 237, 0.1));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .project-card:hover::after {
-            opacity: 1;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-15px) rotateX(5deg);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-        }
-        
-        /* Glowing Text Effect */
-        .glow-text {
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            animation: textGlow 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
-            100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6); }
-        }
-        
-        /* Interactive Buttons */
-        .btn-interactive {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-interactive::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        
-        .btn-interactive:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-        
-        .btn-interactive:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-        
-        /* Typing Animation */
-        .typing-text {
-            overflow: hidden;
-            border-right: 3px solid rgba(255, 255, 255, 0.75);
-            white-space: nowrap;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-        
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: rgba(255, 255, 255, 0.75); }
-        }
-        
-        /* Parallax Effect */
-        .parallax {
-            transform: translateZ(0);
-            transition: transform 0.1s ease-out;
-        }
-        
-        /* Interactive Icons */
-        .interactive-icon {
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-        }
-        
-        .interactive-icon:hover {
-            transform: scale(1.2) rotate(10deg);
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
-        }
-        
-        /* Modal Animations */
-        .modal-enter {
-            animation: modalSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .modal-exit {
-            animation: modalSlideOut 0.3s ease-in;
-        }
-        
-        @keyframes modalSlideIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.7) translateY(-50px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-        
-        @keyframes modalSlideOut {
-            0% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.7) translateY(-50px);
-            }
-        }
-        
-        /* Loading Spinner */
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(79, 70, 229, 0.1);
-            border-left: 4px solid #4f46e5;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Responsive Enhancements */
-        @media (max-width: 768px) {
-            .card-hover:hover {
-                transform: translateY(-5px) scale(1.01);
-            }
-            
-            .project-card:hover {
-                transform: translateY(-8px);
-            }
-        }
-        
-        /* Accessibility */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
-  <style>@view-transition { navigation: auto; }</style>
+html, body { height: 100%; margin: 0; }
+body { background: linear-gradient(135deg, #0a0a0a 0%, #1a0a08 30%, #0a1a2e 70%, #0d0d0d 100%); color: #f5f1eb; font-family: 'Outfit', sans-serif; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #dc2743, #ffc12e, #0a3a5e); border-radius: 4px; box-shadow: 0 0 12px rgba(220,39,67,0.4); }
+
+/* Glass card */
+.glass-card {
+  background: rgba(20, 18, 15, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(220, 39, 67, 0.12);
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-card:hover {
+  border-color: rgba(220, 39, 67, 0.35);
+  box-shadow: 0 0 30px rgba(220, 39, 67, 0.1), inset 0 0 20px rgba(220, 39, 67, 0.02);
+  transform: translateY(-4px);
+}
+
+/* Glow text */
+.glow-text {
+  background: linear-gradient(135deg, #dc2743, #ffc12e, #ff1a1a, #fff000);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s ease infinite;
+}
+@keyframes shimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+
+/* Scroll reveal */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Skill tag */
+.skill-tag {
+  background: rgba(220, 39, 67, 0.08);
+  border: 1px solid rgba(220, 39, 67, 0.22);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+  white-space: nowrap;
+  color: #ff6b82;
+}
+.skill-tag:hover { background: rgba(220, 39, 67, 0.15); border-color: rgba(220, 39, 67, 0.45); box-shadow: 0 0 12px rgba(220, 39, 67, 0.2); }
+
+/* Hero particles */
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: rgba(220, 39, 67, 0.7);
+  border-radius: 50%;
+  animation: float linear infinite;
+  box-shadow: 0 0 4px rgba(220, 39, 67, 0.5);
+}
+@keyframes float {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100%) scale(0.5); opacity: 0; }
+}
+
+/* Section divider */
+.section-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(220, 39, 67, 0.25), rgba(10, 26, 46, 0.4), transparent);
+}
+
+/* Nav */
+.nav-link { position: relative; color: #a8a087; transition: color 0.3s; }
+.nav-link:hover, .nav-link.active { color: #dc2743; }
+.nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:linear-gradient(90deg, #dc2743, #ffc12e); transition: width 0.3s; }
+.nav-link:hover::after, .nav-link.active::after { width:100%; }
+
+/* Timeline */
+.timeline-dot { width:12px; height:12px; border-radius:50%; background:#0a3a5e; box-shadow: 0 0 12px rgba(10,58,94,0.6); }
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #dc2743, #ffc12e);
+  color: #0a0a0a;
+  padding: 12px 28px; border-radius: 10px; font-weight: 600;
+  transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+  border: none; cursor: pointer;
+}
+.btn-primary:hover { box-shadow: 0 0 24px rgba(220,39,67,0.6); transform: translateY(-2px); }
+.btn-outline {
+  border: 1px solid rgba(10,58,94,0.5); color: #0a3a5e; padding: 12px 28px; border-radius: 10px;
+  font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; background: transparent; cursor: pointer;
+}
+.btn-outline:hover { border-color: #0a3a5e; background: rgba(10,58,94,0.1); box-shadow: 0 0 16px rgba(10,58,94,0.25); }
+
+/* Highlight badge */
+.highlight-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(220,39,67,0.1); border: 1px solid rgba(220,39,67,0.28);
+  padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; color: #ff6b82;
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(220,39,67,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(220,39,67,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Experience item */
+.exp-item {
+  position: relative; padding-left: 30px;
+}
+.exp-item::before {
+  content: ''; position: absolute; left: 2px; top: 2px; width: 10px; height: 10px;
+  border-radius: 50%; background: #0a3a5e; box-shadow: 0 0 12px rgba(10,58,94,0.6);
+}
+.exp-item::after {
+  content: ''; position: absolute; left: 7px; top: 12px; width: 0; height: calc(100% + 16px);
+  border-left: 1px solid rgba(10,58,94,0.25);
+}
+.exp-item:last-child::after { display: none; }
+
+/* Project card with gradient border */
+.project-card {
+  position: relative; overflow: hidden;
+  background: rgba(20, 18, 15, 0.7);
+  border: 1px solid rgba(220, 39, 67, 0.12);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex; flex-direction: column;
+}
+.project-card::before {
+  content: ''; position: absolute; inset: 0; opacity: 0;
+  background: linear-gradient(135deg, rgba(220,39,67,0.08), rgba(255,193,46,0.04));
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+.project-card:hover {
+  border-color: rgba(220, 39, 67, 0.35);
+  box-shadow: 0 0 40px rgba(220, 39, 67, 0.12), inset 0 0 20px rgba(220, 39, 67, 0.02);
+  transform: translateY(-6px);
+}
+.project-card:hover::before { opacity: 1; }
+
+/* Accent pill styles */
+.accent-pill-blue { background: rgba(220, 39, 67, 0.1); border: 1px solid rgba(220, 39, 67, 0.25); color: #ff6b82; }
+.accent-pill-purple { background: rgba(10, 58, 94, 0.1); border: 1px solid rgba(10, 58, 94, 0.3); color: #4ba3d4; }
+.accent-pill-cyan { background: rgba(220, 39, 67, 0.08); border: 1px solid rgba(220, 39, 67, 0.2); color: #ff8fa3; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
- <body class="min-h-full">
-  <main><!-- Hero Section -->
-   <section class="gradient-bg text-white py-20 px-6">
-    <div class="particles" id="particles-container"></div>
-    <div class="max-w-6xl mx-auto text-center relative z-10">
-     <div class="floating mb-8">
-      <div class="rocket-icon text-6xl interactive-icon">
-       🚀
-      </div>
+ <body class="h-full">
+  <div id="app-root" class="h-full overflow-auto grid-bg">
+   <!-- Nav -->
+   <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-[#0a0a0a]/85 border-b border-[#dc2743]/10">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+     <span class="font-mono text-sm text-[#dc2743] tracking-wider">AK://</span>
+     <div class="hidden md:flex items-center gap-8 text-sm">
+      <a href="#about" class="nav-link">About</a> <a href="#skills" class="nav-link">Skills</a> <a href="#projects" class="nav-link">Projects</a> <a href="#experience" class="nav-link">Experience</a> <a href="#research" class="nav-link">Research</a> <a href="#contact" class="nav-link">Contact</a>
+     </div><button id="mobile-menu-btn" class="md:hidden text-slate-400"><i data-lucide="menu" style="width:22px;height:22px;"></i></button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex flex-col gap-3 text-sm">
+     <a href="#about" class="nav-link py-1">About</a> <a href="#skills" class="nav-link py-1">Skills</a> <a href="#projects" class="nav-link py-1">Projects</a> <a href="#experience" class="nav-link py-1">Experience</a> <a href="#research" class="nav-link py-1">Research</a> <a href="#contact" class="nav-link py-1">Contact</a>
+    </div>
+   </nav><!-- Hero -->
+   <section id="hero" class="relative min-h-[100%] flex items-center justify-center overflow-hidden px-6">
+    <div id="particles" class="absolute inset-0 pointer-events-none"></div>
+    <div class="relative z-10 text-center max-w-3xl">
+     <div class="highlight-badge mb-6 mx-auto w-fit">
+      <i data-lucide="rocket" style="width:14px;height:14px;"></i> <span>Aerospace · AI · Embedded Systems</span>
      </div>
-     <h1 id="hero-name" class="text-5xl md:text-7xl font-bold mb-4 glow-text">B. Ashwin Kumar</h1>
-     <p id="hero-title" class="text-xl md:text-2xl mb-8 opacity-90 typing-text">Aerospace Engineer &amp; AI Specialist</p>
-     <div class="flex flex-wrap justify-center gap-6 text-lg">
-      <div class="flex items-center gap-2"><span>📍</span> <span id="hero-location">Chennai, Tamil Nadu</span>
-      </div>
-      <div class="flex items-center gap-2"><span>📧</span> <a id="hero-email" href="mailto:elonspacex2002@gmail.com" class="hover:underline">elonspacex2002@gmail.com</a>
-      </div>
-      <div class="flex items-center gap-2"><span>📱</span> <span id="hero-phone">+91-9884922037</span>
-      </div>
-     </div>
-     <div class="flex justify-center gap-4 mt-8"><a id="hero-linkedin" href="https://www.linkedin.com/in/ashwin-kumar-b-d22m03y2005" target="_blank" rel="noopener noreferrer" class="bg-white text-purple-600 px-6 py-3 rounded-full font-semibold btn-interactive"> <span class="relative z-10">💼 LinkedIn Profile</span> </a> <a id="hero-github" href="https://github.com/Ashpathfinder" target="_blank" rel="noopener noreferrer" class="border-2 border-white text-white px-6 py-3 rounded-full font-semibold btn-interactive"> <span class="relative z-10">🔗 GitHub Portfolio</span> </a>
+     <h1 id="el-hero-name" class="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 glow-text">Ashwin Kumar B</h1>
+     <p id="el-hero-title" class="text-lg md:text-xl text-slate-300 font-light mb-3">Avionics &amp; AI Engineer | Flight Systems &amp; Intelligent Monitoring</p>
+     <p id="el-hero-tagline" class="text-sm md:text-base text-slate-500 font-mono mb-10">"Building safety-critical systems where reliability is non-negotiable."</p>
+     <div class="flex flex-wrap justify-center gap-4">
+      <a href="#projects" class="btn-primary"><i data-lucide="layers" style="width:18px;height:18px;"></i> View Projects</a> <a href="#contact" class="btn-outline"><i data-lucide="send" style="width:18px;height:18px;"></i> Contact</a>
      </div>
     </div>
-   </section><!-- Professional Summary -->
-   <section class="py-16 px-6 bg-gray-50">
-    <div class="max-w-6xl mx-auto">
-     <div class="section-fade">
-      <h2 id="summary-title" class="text-4xl font-bold text-center mb-12 text-gray-800">Professional Summary</h2>
-      <div class="bg-white rounded-2xl p-8 shadow-lg max-w-4xl mx-auto">
-       <p class="text-lg leading-relaxed text-gray-700">Final-year Computer Science (AI &amp; ML) student with specialized experience in <strong>aerospace avionics</strong>, embedded systems, and AI applications. Completed an internship at <strong>ISRO (Gaganyaan program)</strong> and developed multiple student rocketry avionics systems, including a custom flight computer (TITAN) and telemetry modules. Skilled in Python, C/C++, FreeRTOS, PCB design, and AI-driven applications, with a strong passion for rocket propulsion, spacecraft control software, and autonomous systems.</p>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-slate-600"><i data-lucide="chevron-down" style="width:24px;height:24px;"></i>
+    </div>
+   </section><!-- About -->
+   <div class="section-line mx-auto max-w-4xl"></div>
+   <section id="about" class="max-w-4xl mx-auto px-6 py-24 reveal">
+    <h2 class="text-3xl font-bold mb-2 flex items-center gap-3"><i data-lucide="user" style="width:28px;height:28px;color:#38bdf8;"></i> About</h2>
+    <div class="w-16 h-1 bg-gradient-to-r from-[#38bdf8] to-[#8b5cf6] rounded mb-8"></div>
+    <div class="glass-card p-8">
+     <p id="el-about-text" class="text-slate-300 leading-relaxed text-[1.05rem]">Systems engineer with hands-on experience designing flight computers, real-time telemetry architectures, and AI-driven monitoring pipelines. Completed an electronics internship at ISRO, automating stage checkout procedures for the HRLV C-32 second stage. My work sits at the intersection of embedded systems, sensor fusion, and machine learning—building solutions where failure margins are measured in milliseconds and correctness is verified, not assumed. Every system I ship is tested under fault conditions before it earns trust.</p>
+    </div>
+   </section><!-- Skills -->
+   <div class="section-line mx-auto max-w-4xl"></div>
+   <section id="skills" class="max-w-4xl mx-auto px-6 py-24 reveal">
+    <h2 class="text-3xl font-bold mb-2 flex items-center gap-3"><i data-lucide="cpu" style="width:28px;height:28px;color:#38bdf8;"></i> Skills</h2>
+    <div class="w-16 h-1 bg-gradient-to-r from-[#38bdf8] to-[#8b5cf6] rounded mb-10"></div>
+    <div class="grid md:grid-cols-2 gap-6">
+     <div class="glass-card p-6">
+      <h3 class="text-sm font-mono text-[#38bdf8] uppercase tracking-widest mb-4 flex items-center gap-2"><i data-lucide="code" style="width:16px;height:16px;"></i> Programming</h3>
+      <div class="flex flex-wrap gap-2">
+       <span class="skill-tag">Python</span><span class="skill-tag">C/C++</span>
       </div>
      </div>
-    </div>
-   </section><!-- Experience Timeline -->
-   <section class="py-16 px-6">
-    <div class="max-w-6xl mx-auto">
-     <div class="section-fade">
-      <h2 id="experience-title" class="text-4xl font-bold text-center mb-12 text-gray-800">Experience</h2>
-      <div class="max-w-4xl mx-auto"><!-- ISRO Internship -->
-       <div class="timeline-item mb-12">
-        <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
-         <div class="flex items-center gap-3 mb-4"><span class="text-3xl">🛰️</span>
-          <div>
-           <h3 class="text-2xl font-bold text-gray-800">Intern – ISRO, SDSC SHAR</h3>
-           <p class="text-purple-600 font-semibold">EECF Department | Jun 2024 – Jul 2024</p>
-          </div>
-         </div>
-         <ul class="text-gray-700 space-y-2">
-          <li>• Automated stage checkout system for the C-32 Second Stage of HRLV (Gaganyaan mission)</li>
-          <li>• Developed LabVIEW-based automation tools for checkout testing and stage readiness validation</li>
-         </ul>
-        </div>
-       </div><!-- Current Internship -->
-       <div class="timeline-item mb-12">
-        <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
-         <div class="flex items-center gap-3 mb-4"><span class="text-3xl">🤖</span>
-          <div>
-           <h3 class="text-2xl font-bold text-gray-800">AI Engineer Intern</h3>
-           <p class="text-purple-600 font-semibold">Infinity Arsenal Private Limited | Oct 2024 – Jul 2025</p>
-          </div>
-         </div>
-         <ul class="text-gray-700 space-y-2">
-          <li>• Developed an AI-powered UAV detection system using YOLO model</li>
-          <li>• Implemented computer vision solutions using OpenCV, YOLO, Roboflow, and Python</li>
-         </ul>
-        </div>
-       </div><!-- Student Projects -->
-       <div class="timeline-item">
-        <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
-         <div class="flex items-center gap-3 mb-4"><span class="text-3xl">🚀</span>
-          <div>
-           <h3 class="text-2xl font-bold text-gray-800">Student Aerospace Projects</h3>
-           <p class="text-purple-600 font-semibold">2024 – Present</p>
-          </div>
-         </div>
-         <ul class="text-gray-700 space-y-2">
-          <li>• Designed TITAN rocket flight computer using ESP32-S3 Feather with Kalman filtering and telemetry</li>
-          <li>• Built custom power distribution PCB with buck &amp; boost converters (5V, 3.3V, 9–12V)</li>
-          <li>• Conceptualized ground station software with real-time telemetry visualization and GPS mapping</li>
-         </ul>
-        </div>
-       </div>
+     <div class="glass-card p-6">
+      <h3 class="text-sm font-mono text-[#8b5cf6] uppercase tracking-widest mb-4 flex items-center gap-2"><i data-lucide="brain" style="width:16px;height:16px;"></i> AI / ML</h3>
+      <div class="flex flex-wrap gap-2">
+       <span class="skill-tag">Machine Learning</span><span class="skill-tag">SHAP</span><span class="skill-tag">OpenCV</span><span class="skill-tag">Roboflow</span>
+      </div>
+     </div>
+     <div class="glass-card p-6">
+      <h3 class="text-sm font-mono text-[#22d3ee] uppercase tracking-widest mb-4 flex items-center gap-2"><i data-lucide="radio" style="width:16px;height:16px;"></i> Embedded &amp; Aerospace</h3>
+      <div class="flex flex-wrap gap-2">
+       <span class="skill-tag">Flight Computers</span><span class="skill-tag">Telemetry Systems</span><span class="skill-tag">Sensor Fusion</span><span class="skill-tag">FSM Design</span>
+      </div>
+     </div>
+     <div class="glass-card p-6">
+      <h3 class="text-sm font-mono text-[#a78bfa] uppercase tracking-widest mb-4 flex items-center gap-2"><i data-lucide="tools" style="width:16px;height:16px;"></i> Tools &amp; Tech</h3>
+      <div class="flex flex-wrap gap-2">
+       <span class="skill-tag">MATLAB</span><span class="skill-tag">LabVIEW</span><span class="skill-tag">Git</span><span class="skill-tag">SQL</span><span class="skill-tag">NumPy</span><span class="skill-tag">Pandas</span><span class="skill-tag">Proteus</span><span class="skill-tag">ESP32</span>
       </div>
      </div>
     </div>
    </section><!-- Featured Projects -->
-   <section id="projects-section" class="py-16 px-6 bg-gray-50">
-    <div class="max-w-6xl mx-auto">
-     <div class="section-fade">
-      <h2 id="projects-title" class="text-4xl font-bold text-center mb-12 text-gray-800">Featured Projects</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- TITAN Flight Computer -->
-       <div class="bg-white rounded-xl p-6 shadow-lg project-card card-hover cursor-pointer" onclick="showProjectDetail('titan')">
-        <div class="text-4xl mb-4 interactive-icon">
-         🖥️
-        </div>
-        <h3 class="text-xl font-bold mb-3 text-gray-800">TITAN Flight Computer</h3>
-        <p class="text-gray-600 mb-4">Advanced rocket flight computer with ESP32-S3, Kalman filtering, and real-time telemetry for student rocketry missions.</p>
-        <div class="flex flex-wrap gap-2 mb-4"><span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">ESP32</span> <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">Kalman Filter</span> <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">Telemetry</span>
-        </div>
-        <div class="text-purple-600 font-semibold text-sm flex items-center gap-2 transition-all hover:gap-4"><span>Click to explore</span> <span class="transition-transform">→</span>
-        </div>
-       </div><!-- UAV Detection System -->
-       <div class="bg-white rounded-xl p-6 shadow-lg project-card card-hover cursor-pointer" onclick="showProjectDetail('uav')">
-        <div class="text-4xl mb-4 interactive-icon">
-         🛸
-        </div>
-        <h3 class="text-xl font-bold mb-3 text-gray-800">AI UAV Detection System</h3>
-        <p class="text-gray-600 mb-4">YOLO-based computer vision system for real-time drone detection and tracking using advanced AI models.</p>
-        <div class="flex flex-wrap gap-2 mb-4"><span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">YOLO</span> <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">OpenCV</span> <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">Python</span>
-        </div>
-        <div class="text-purple-600 font-semibold text-sm flex items-center gap-2 transition-all hover:gap-4"><span>Click to explore</span> <span class="transition-transform">→</span>
-        </div>
-       </div><!-- ROCKETPATH Simulator -->
-       <div class="bg-white rounded-xl p-6 shadow-lg project-card card-hover cursor-pointer" onclick="showProjectDetail('rocketpath')">
-        <div class="text-4xl mb-4 interactive-icon">
-         📊
-        </div>
-        <h3 class="text-xl font-bold mb-3 text-gray-800">ROCKETPATH Simulator</h3>
-        <p class="text-gray-600 mb-4">Python-based rocket simulation tool for thrust, ISP, and trajectory calculations with advanced physics modeling.</p>
-        <div class="flex flex-wrap gap-2 mb-4"><span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">Python</span> <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">Physics</span> <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">Simulation</span>
-        </div>
-        <div class="text-purple-600 font-semibold text-sm flex items-center gap-2 transition-all hover:gap-4"><span>Click to explore</span> <span class="transition-transform">→</span>
-        </div>
-       </div><!-- Turboflow Ground Station -->
-       <div class="bg-white rounded-xl p-6 shadow-lg project-card card-hover cursor-pointer" onclick="showProjectDetail('turboflow')">
-        <div class="text-4xl mb-4 interactive-icon">
-         📡
-        </div>
-        <h3 class="text-xl font-bold mb-3 text-gray-800">Turboflow Ground Station</h3>
-        <p class="text-gray-600 mb-4">Real-time telemetry visualization system for rocket data monitoring with serial communication interface.</p>
-        <div class="flex flex-wrap gap-2 mb-4"><span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">Serial Comm</span> <span class="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">Real-time</span> <span class="bg-pink-100 text-pink-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">Visualization</span>
-        </div>
-        <div class="text-purple-600 font-semibold text-sm flex items-center gap-2 transition-all hover:gap-4"><span>Click to explore</span> <span class="transition-transform">→</span>
-        </div>
-       </div><!-- Asteroid Search -->
-       <div class="bg-white rounded-xl p-6 shadow-lg project-card card-hover cursor-pointer" onclick="showProjectDetail('asteroid')">
-        <div class="text-4xl mb-4 interactive-icon">
-         ☄️
-        </div>
-        <h3 class="text-xl font-bold mb-3 text-gray-800">Asteroid Search Campaign</h3>
-        <p class="text-gray-600 mb-4">Team Starlight project that detected 3 preliminary asteroid candidates with official recognition.</p>
-        <div class="flex flex-wrap gap-2 mb-4"><span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">Astronomy</span> <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">Research</span> <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">Discovery</span>
-        </div>
-        <div class="text-purple-600 font-semibold text-sm flex items-center gap-2 transition-all hover:gap-4"><span>Click to explore</span> <span class="transition-transform">→</span>
-        </div>
-       </div><!-- PCB Design -->
-       <div class="bg-white rounded-xl p-6 shadow-lg project-card card-hover cursor-pointer" onclick="showProjectDetail('pcb')">
-        <div class="text-4xl mb-4 interactive-icon">
-         ⚡
-        </div>
-        <h3 class="text-xl font-bold mb-3 text-gray-800">Power Distribution PCB</h3>
-        <p class="text-gray-600 mb-4">Custom PCB design with buck &amp; boost converters providing multiple voltage rails for aerospace applications.</p>
-        <div class="flex flex-wrap gap-2 mb-4"><span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">PCB Design</span> <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">Power Systems</span> <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm transition-all hover:scale-105">Hardware</span>
-        </div>
-        <div class="text-purple-600 font-semibold text-sm flex items-center gap-2 transition-all hover:gap-4"><span>Click to explore</span> <span class="transition-transform">→</span>
-        </div>
+   <div class="section-line mx-auto max-w-6xl"></div>
+   <section id="projects" class="max-w-6xl mx-auto px-6 py-24 reveal">
+    <h2 class="text-3xl font-bold mb-2 flex items-center gap-3"><i data-lucide="folder-open" style="width:28px;height:28px;color:#38bdf8;"></i> Featured Projects</h2>
+    <div class="w-16 h-1 bg-gradient-to-r from-[#38bdf8] to-[#8b5cf6] rounded mb-10"></div>
+    <div class="grid md:grid-cols-2 gap-6">
+     <!-- Project 1 -->
+     <div class="project-card">
+      <div class="w-full h-40 rounded-lg mb-5 flex items-center justify-center" style="background: linear-gradient(135deg, #0c1929, #162544);">
+       <svg width="80" height="80" viewbox="0 0 80 80" fill="none"><path d="M40 8L44 30H56L46 42L50 64L40 52L30 64L34 42L24 30H36L40 8Z" fill="none" stroke="#38bdf8" stroke-width="1.5" /><line x1="40" y1="52" x2="40" y2="74" stroke="#38bdf8" stroke-width="1" stroke-dasharray="3 3" /><circle cx="40" cy="40" r="30" stroke="#1e3a5f" stroke-width="0.5" fill="none" />
+       </svg>
+      </div>
+      <div class="highlight-badge w-fit mb-3">
+       <i data-lucide="zap" style="width:12px;height:12px;"></i> Flight Systems
+      </div>
+      <h3 class="text-lg font-semibold mb-3">Rocket Flight Computer System</h3>
+      <div class="mb-4">
+       <p class="text-xs font-mono text-[#22d3ee] mb-2 uppercase tracking-wide">Problem</p>
+       <p class="text-slate-400 text-sm leading-relaxed mb-4">Real-time avionics requiring sub-100ms response times, reliable RF telemetry at 1 km range, and fault-tolerant state management for launch/ascent/descent phases.</p>
+      </div>
+      <div class="mb-4">
+       <p class="text-xs font-mono text-[#a78bfa] mb-2 uppercase tracking-wide">Architecture</p>
+       <p class="text-slate-400 text-sm leading-relaxed mb-4">Modular ESP32-S3 flight logic with Kalman filtering for sensor fusion, RF telemetry system, ground station visualization, and FSM-based state machine for vehicle lifecycle.</p>
+      </div>
+      <div class="mb-4">
+       <p class="text-xs font-mono text-[#38bdf8] mb-2 uppercase tracking-wide">Tech Stack</p>
+       <div class="flex flex-wrap gap-1.5">
+        <span class="accent-pill-blue text-xs px-2 py-1 rounded">ESP32-S3</span><span class="accent-pill-blue text-xs px-2 py-1 rounded">C++</span><span class="accent-pill-blue text-xs px-2 py-1 rounded">RF Module</span>
        </div>
+      </div>
+      <div>
+       <p class="text-xs font-mono text-[#22d3ee] mb-2 uppercase tracking-wide">Key Achievements</p>
+       <ul class="text-slate-400 text-sm list-disc list-inside space-y-1">
+        <li>1 km RF telemetry link</li>
+        <li>Real-time ground station visualization</li>
+        <li>Fault-tolerant FSM architecture</li>
+        <li>Sensor fusion with Kalman filtering</li>
+       </ul>
+      </div>
+     </div><!-- Project 2 -->
+     <div class="project-card">
+      <div class="w-full h-40 rounded-lg mb-5 flex items-center justify-center" style="background: linear-gradient(135deg, #0c1929, #162544);">
+       <svg width="80" height="80" viewbox="0 0 80 80" fill="none"><rect x="20" y="30" width="40" height="24" rx="3" stroke="#38bdf8" stroke-width="1.5" fill="none" /><line x1="30" y1="30" x2="24" y2="20" stroke="#38bdf8" stroke-width="1" /><line x1="50" y1="30" x2="56" y2="20" stroke="#38bdf8" stroke-width="1" /><circle cx="40" cy="42" r="8" stroke="#818cf8" stroke-width="1" fill="none" /><circle cx="40" cy="42" r="3" fill="#38bdf8" opacity="0.5" /><rect x="28" y="54" width="24" height="4" rx="2" stroke="#1e3a5f" stroke-width="0.5" fill="none" />
+       </svg>
+      </div>
+      <div class="highlight-badge w-fit mb-3">
+       <i data-lucide="eye" style="width:12px;height:12px;"></i> Computer Vision
+      </div>
+      <h3 class="text-lg font-semibold mb-3">AI-Based UAV Detection System</h3>
+      <div class="mb-4">
+       <p class="text-xs font-mono text-[#22d3ee] mb-2 uppercase tracking-wide">Problem</p>
+       <p class="text-slate-400 text-sm leading-relaxed mb-4">Real-time drone detection in varied lighting conditions with high accuracy, requiring optimized inference for edge deployment.</p>
+      </div>
+      <div class="mb-4">
+       <p class="text-xs font-mono text-[#a78bfa] mb-2 uppercase tracking-wide">Architecture</p>
+       <p class="text-slate-400 text-sm leading-relaxed mb-4">End-to-end YOLO-based detection pipeline with OpenCV preprocessing, Roboflow dataset augmentation, and optimized model inference for real-time processing.</p>
+      </div>
+      <div class="mb-4">
+       <p class="text-xs font-mono text-[#38bdf8] mb-2 uppercase tracking-wide">Tech Stack</p>
+       <div class="flex flex-wrap gap-1.5">
+        <span class="accent-pill-purple text-xs px-2 py-1 rounded">YOLO</span><span class="accent-pill-purple text-xs px-2 py-1 rounded">OpenCV</span><span class="accent-pill-purple text-xs px-2 py-1 rounded">Roboflow</span><span class="accent-pill-purple text-xs px-2 py-1 rounded">Python</span>
+       </div>
+      </div>
+      <div>
+       <p class="text-xs font-mono text-[#22d3ee] mb-2 uppercase tracking-wide">Key Achievements</p>
+       <ul class="text-slate-400 text-sm list-disc list-inside space-y-1">
+        <li>91% detection accuracy</li>
+        <li>Real-time inference pipeline</li>
+        <li>Optimized model performance</li>
+        <li>Robust in varied conditions</li>
+       </ul>
+      </div>
+     </div><!-- Project 3 -->
+     <div class="project-card">
+      <div class="w-full h-40 rounded-lg mb-5 flex items-center justify-center" style="background: linear-gradient(135deg, #0c1929, #162544);">
+       <svg width="80" height="80" viewbox="0 0 80 80" fill="none"><polyline points="12,55 22,50 32,58 42,35 52,42 62,28 72,32" stroke="#38bdf8" stroke-width="1.5" fill="none" /><circle cx="42" cy="35" r="4" stroke="#818cf8" stroke-width="1" fill="none" /><line x1="42" y1="35" x2="42" y2="18" stroke="#818cf8" stroke-width="0.8" stroke-dasharray="2 2" /><text x="38" y="15" fill="#818cf8" font-size="8" font-family="monospace">
+         !
+        </text><line x1="10" y1="62" x2="74" y2="62" stroke="#1e3a5f" stroke-width="0.5" />
+       </svg>
+      </div>
+      <div class="highlight-badge w-fit mb-3">
+       <i data-lucide="activity" style="width:12px;height:12px;"></i> Explainable AI
+      </div>
+      <h3 class="text-lg font-semibold mb-3">XAI Health Monitoring System</h3>
+      <div class="mb-4">
+       <p class="text-xs font-mono text-[#22d3ee] mb-2 uppercase tracking-wide">Problem</p>
+       <p class="text-slate-400 text-sm leading-relaxed mb-4">Multivariate time-series analysis for fault diagnosis with interpretable root-cause explanations and system degradation tracking.</p>
+      </div>
+      <div class="mb-4">
+       <p class="text-xs font-mono text-[#a78bfa] mb-2 uppercase tracking-wide">Architecture</p>
+       <p class="text-slate-400 text-sm leading-relaxed mb-4">Isolation Forest for anomaly detection, SHAP for explainability, and custom Health Index (0–100) algorithm for degradation prediction and tracking.</p>
+      </div>
+      <div class="mb-4">
+       <p class="text-xs font-mono text-[#38bdf8] mb-2 uppercase tracking-wide">Tech Stack</p>
+       <div class="flex flex-wrap gap-1.5">
+        <span class="accent-pill-cyan text-xs px-2 py-1 rounded">Isolation Forest</span><span class="accent-pill-cyan text-xs px-2 py-1 rounded">SHAP</span><span class="accent-pill-cyan text-xs px-2 py-1 rounded">NumPy</span><span class="accent-pill-cyan text-xs px-2 py-1 rounded">Pandas</span>
+       </div>
+      </div>
+      <div>
+       <p class="text-xs font-mono text-[#22d3ee] mb-2 uppercase tracking-wide">Key Achievements</p>
+       <ul class="text-slate-400 text-sm list-disc list-inside space-y-1">
+        <li>Multivariate anomaly detection</li>
+        <li>SHAP-based root cause analysis</li>
+        <li>Health Index (0–100) tracking</li>
+        <li>Degradation prediction pipeline</li>
+       </ul>
+      </div>
+     </div><!-- Project 4 -->
+     <div class="project-card">
+      <div class="w-full h-40 rounded-lg mb-5 flex items-center justify-center" style="background: linear-gradient(135deg, #0c1929, #162544);">
+       <svg width="80" height="80" viewbox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="28" stroke="#38bdf8" stroke-width="1.5" fill="none" /><path d="M40,12 A28,28 0 0,1 60,20" stroke="#8b5cf6" stroke-width="2" fill="none" stroke-linecap="round" /><path d="M40,12 A28,28 0 0,0 20,20" stroke="#22d3ee" stroke-width="2" fill="none" stroke-linecap="round" /><line x1="40" y1="12" x2="40" y2="2" stroke="#a78bfa" stroke-width="1" stroke-dasharray="2 2" />
+       </svg>
+      </div>
+      <div class="highlight-badge w-fit mb-3">
+       <i data-lucide="globe" style="width:12px;height:12px;"></i> Mission Planning
+      </div>
+      <h3 class="text-lg font-semibold mb-3">RocketPath Ops (Mission Planning)</h3>
+      <div class="mb-4">
+       <p class="text-xs font-mono text-[#22d3ee] mb-2 uppercase tracking-wide">Problem</p>
+       <p class="text-slate-400 text-sm leading-relaxed mb-4">Structured mission coordination requiring real-time weather integration, launch readiness evaluation, and team workflow management.</p>
+      </div>
+      <div class="mb-4">
+       <p class="text-xs font-mono text-[#a78bfa] mb-2 uppercase tracking-wide">Architecture</p>
+       <p class="text-slate-400 text-sm leading-relaxed mb-4">Weather data integration, launch condition evaluation logic, backend persistence with Supabase, and structured workflow system for team coordination.</p>
+      </div>
+      <div class="mb-4">
+       <p class="text-xs font-mono text-[#38bdf8] mb-2 uppercase tracking-wide">Tech Stack</p>
+       <div class="flex flex-wrap gap-1.5">
+        <span class="accent-pill-blue text-xs px-2 py-1 rounded">Supabase</span><span class="accent-pill-blue text-xs px-2 py-1 rounded">Python</span><span class="accent-pill-blue text-xs px-2 py-1 rounded">Weather API</span>
+       </div>
+      </div>
+      <div>
+       <p class="text-xs font-mono text-[#22d3ee] mb-2 uppercase tracking-wide">Key Achievements</p>
+       <ul class="text-slate-400 text-sm list-disc list-inside space-y-1">
+        <li>Real-time weather integration</li>
+        <li>Launch readiness evaluation</li>
+        <li>Structured team coordination</li>
+        <li>Backend persistence &amp; logging</li>
+       </ul>
       </div>
      </div>
     </div>
-   </section><!-- Project Detail Modal -->
-   <div id="project-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-     <div class="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
-      <h2 id="modal-title" class="text-3xl font-bold text-gray-800"></h2><button onclick="closeProjectDetail()" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+   </section><!-- Engineering Projects -->
+   <div class="section-line mx-auto max-w-5xl"></div>
+   <section class="max-w-5xl mx-auto px-6 py-24 reveal">
+    <h2 class="text-3xl font-bold mb-2 flex items-center gap-3"><i data-lucide="wrench" style="width:28px;height:28px;color:#38bdf8;"></i> Engineering Projects</h2>
+    <div class="w-16 h-1 bg-gradient-to-r from-[#38bdf8] to-[#8b5cf6] rounded mb-10"></div>
+    <div class="grid md:grid-cols-2 gap-6">
+     <div class="glass-card p-6">
+      <h3 class="text-lg font-semibold mb-3 flex items-center gap-2"><i data-lucide="radio" style="width:18px;height:18px;color:#22d3ee;"></i> Embedded DAQ &amp; Control</h3>
+      <p class="text-slate-400 text-sm leading-relaxed mb-4">ESP32-based data acquisition system with FSM-controlled actuators, achieving 10 Hz telemetry rate over RF link for field deployment and experimental testing.</p>
+      <div class="flex flex-wrap gap-2">
+       <span class="accent-pill-cyan text-xs px-2 py-1 rounded">ESP32</span><span class="accent-pill-cyan text-xs px-2 py-1 rounded">FSM</span><span class="accent-pill-cyan text-xs px-2 py-1 rounded">RF Link</span>
+      </div>
      </div>
-     <div id="modal-content" class="p-6"><!-- Content will be dynamically loaded -->
-     </div>
-    </div>
-   </div><!-- Skills Section -->
-   <section class="py-16 px-6">
-    <div class="max-w-6xl mx-auto">
-     <div class="section-fade">
-      <h2 id="skills-title" class="text-4xl font-bold text-center mb-12 text-gray-800">Technical Skills</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8"><!-- Programming -->
-       <div class="bg-white rounded-xl p-6 shadow-lg">
-        <div class="text-3xl mb-4">
-         💻
-        </div>
-        <h3 class="text-xl font-bold mb-4 text-gray-800">Programming</h3>
-        <div class="space-y-3">
-         <div class="skill-container">
-          <div class="flex justify-between mb-1"><span class="text-sm text-gray-600">Python</span> <span class="text-sm text-gray-600">95%</span>
-          </div>
-          <div class="bg-gray-200 rounded-full h-2">
-           <div class="skill-bar rounded-full" style="width: 95%"></div>
-          </div>
-         </div>
-         <div class="skill-container">
-          <div class="flex justify-between mb-1"><span class="text-sm text-gray-600">C/C++</span> <span class="text-sm text-gray-600">90%</span>
-          </div>
-          <div class="bg-gray-200 rounded-full h-2">
-           <div class="skill-bar rounded-full" style="width: 90%"></div>
-          </div>
-         </div>
-         <div class="skill-container">
-          <div class="flex justify-between mb-1"><span class="text-sm text-gray-600">LabVIEW</span> <span class="text-sm text-gray-600">85%</span>
-          </div>
-          <div class="bg-gray-200 rounded-full h-2">
-           <div class="skill-bar rounded-full" style="width: 85%"></div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Aerospace -->
-       <div class="bg-white rounded-xl p-6 shadow-lg">
-        <div class="text-3xl mb-4">
-         🚀
-        </div>
-        <h3 class="text-xl font-bold mb-4 text-gray-800">Aerospace</h3>
-        <div class="space-y-3">
-         <div>
-          <div class="flex justify-between mb-1"><span class="text-sm text-gray-600">Flight Computers</span> <span class="text-sm text-gray-600">92%</span>
-          </div>
-          <div class="bg-gray-200 rounded-full h-2">
-           <div class="skill-bar rounded-full" style="width: 92%"></div>
-          </div>
-         </div>
-         <div>
-          <div class="flex justify-between mb-1"><span class="text-sm text-gray-600">Telemetry</span> <span class="text-sm text-gray-600">88%</span>
-          </div>
-          <div class="bg-gray-200 rounded-full h-2">
-           <div class="skill-bar rounded-full" style="width: 88%"></div>
-          </div>
-         </div>
-         <div>
-          <div class="flex justify-between mb-1"><span class="text-sm text-gray-600">Avionics</span> <span class="text-sm text-gray-600">90%</span>
-          </div>
-          <div class="bg-gray-200 rounded-full h-2">
-           <div class="skill-bar rounded-full" style="width: 90%"></div>
-          </div>
-         </div>
-        </div>
-       </div><!-- AI/ML -->
-       <div class="bg-white rounded-xl p-6 shadow-lg">
-        <div class="text-3xl mb-4">
-         🤖
-        </div>
-        <h3 class="text-xl font-bold mb-4 text-gray-800">AI/ML</h3>
-        <div class="space-y-3">
-         <div>
-          <div class="flex justify-between mb-1"><span class="text-sm text-gray-600">PyTorch</span> <span class="text-sm text-gray-600">85%</span>
-          </div>
-          <div class="bg-gray-200 rounded-full h-2">
-           <div class="skill-bar rounded-full" style="width: 85%"></div>
-          </div>
-         </div>
-         <div>
-          <div class="flex justify-between mb-1"><span class="text-sm text-gray-600">Computer Vision</span> <span class="text-sm text-gray-600">88%</span>
-          </div>
-          <div class="bg-gray-200 rounded-full h-2">
-           <div class="skill-bar rounded-full" style="width: 88%"></div>
-          </div>
-         </div>
-         <div>
-          <div class="flex justify-between mb-1"><span class="text-sm text-gray-600">YOLO</span> <span class="text-sm text-gray-600">90%</span>
-          </div>
-          <div class="bg-gray-200 rounded-full h-2">
-           <div class="skill-bar rounded-full" style="width: 90%"></div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Hardware -->
-       <div class="bg-white rounded-xl p-6 shadow-lg">
-        <div class="text-3xl mb-4">
-         ⚡
-        </div>
-        <h3 class="text-xl font-bold mb-4 text-gray-800">Hardware</h3>
-        <div class="space-y-3">
-         <div>
-          <div class="flex justify-between mb-1"><span class="text-sm text-gray-600">PCB Design</span> <span class="text-sm text-gray-600">87%</span>
-          </div>
-          <div class="bg-gray-200 rounded-full h-2">
-           <div class="skill-bar rounded-full" style="width: 87%"></div>
-          </div>
-         </div>
-         <div>
-          <div class="flex justify-between mb-1"><span class="text-sm text-gray-600">Embedded Systems</span> <span class="text-sm text-gray-600">92%</span>
-          </div>
-          <div class="bg-gray-200 rounded-full h-2">
-           <div class="skill-bar rounded-full" style="width: 92%"></div>
-          </div>
-         </div>
-         <div>
-          <div class="flex justify-between mb-1"><span class="text-sm text-gray-600">IoT Development</span> <span class="text-sm text-gray-600">85%</span>
-          </div>
-          <div class="bg-gray-200 rounded-full h-2">
-           <div class="skill-bar rounded-full" style="width: 85%"></div>
-          </div>
-         </div>
-        </div>
-       </div>
+     <div class="glass-card p-6">
+      <h3 class="text-lg font-semibold mb-3 flex items-center gap-2"><i data-lucide="chart-line" style="width:18px;height:18px;color:#a78bfa;"></i> RocketPath Simulation</h3>
+      <p class="text-slate-400 text-sm leading-relaxed mb-4">Physics-based simulation engine using numerical integration for trajectory prediction. Configurable engine parameters for flexible mission modeling and analysis.</p>
+      <div class="flex flex-wrap gap-2">
+       <span class="accent-pill-purple text-xs px-2 py-1 rounded">Numerical Methods</span><span class="accent-pill-purple text-xs px-2 py-1 rounded">Trajectory</span><span class="accent-pill-purple text-xs px-2 py-1 rounded">Physics Engine</span>
       </div>
      </div>
     </div>
-   </section><!-- Achievements & Interests -->
-   <section class="py-16 px-6 bg-gray-50">
-    <div class="max-w-6xl mx-auto">
-     <div class="section-fade">
-      <div class="grid md:grid-cols-2 gap-12"><!-- Achievements -->
-       <div>
-        <h2 class="text-3xl font-bold mb-8 text-gray-800">🏆 Achievements</h2>
-        <div class="space-y-6">
-         <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
-          <div class="flex items-center gap-4">
-           <div class="text-3xl">
-            🛰️
-           </div>
-           <div>
-            <h3 class="font-bold text-gray-800">ISRO Internship</h3>
-            <p class="text-gray-600">Worked on India's prestigious Gaganyaan mission</p>
-           </div>
-          </div>
-         </div>
-         <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
-          <div class="flex items-center gap-4">
-           <div class="text-3xl">
-            🚀
-           </div>
-           <div>
-            <h3 class="font-bold text-gray-800">Lead Avionics Developer</h3>
-            <p class="text-gray-600">Student rocketry systems &amp; flight computers</p>
-           </div>
-          </div>
-         </div>
-         <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
-          <div class="flex items-center gap-4">
-           <div class="text-3xl">
-            ☄️
-           </div>
-           <div>
-            <h3 class="font-bold text-gray-800">Asteroid Discovery</h3>
-            <p class="text-gray-600">3 preliminary candidates officially recognized</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Interests -->
-       <div>
-        <h2 class="text-3xl font-bold mb-8 text-gray-800">🎯 Interests</h2>
-        <div class="grid grid-cols-2 gap-4">
-         <div class="bg-white rounded-xl p-6 shadow-lg card-hover text-center">
-          <div class="text-4xl mb-3">
-           🚀
-          </div>
-          <h3 class="font-bold text-gray-800">Rocket Propulsion</h3>
-         </div>
-         <div class="bg-white rounded-xl p-6 shadow-lg card-hover text-center">
-          <div class="text-4xl mb-3">
-           🛰️
-          </div>
-          <h3 class="font-bold text-gray-800">Avionics Systems</h3>
-         </div>
-         <div class="bg-white rounded-xl p-6 shadow-lg card-hover text-center">
-          <div class="text-4xl mb-3">
-           🤖
-          </div>
-          <h3 class="font-bold text-gray-800">AI &amp; Robotics</h3>
-         </div>
-         <div class="bg-white rounded-xl p-6 shadow-lg card-hover text-center">
-          <div class="text-4xl mb-3">
-           🏎️
-          </div>
-          <h3 class="font-bold text-gray-800">Formula 1</h3>
-         </div>
-        </div>
-       </div>
+   </section><!-- Experience -->
+   <div class="section-line mx-auto max-w-5xl"></div>
+   <section id="experience" class="max-w-5xl mx-auto px-6 py-24 reveal">
+    <h2 class="text-3xl font-bold mb-2 flex items-center gap-3"><i data-lucide="briefcase" style="width:28px;height:28px;color:#38bdf8;"></i> Experience</h2>
+    <div class="w-16 h-1 bg-gradient-to-r from-[#38bdf8] to-[#8b5cf6] rounded mb-10"></div>
+    <div class="space-y-8">
+     <div class="exp-item glass-card p-6">
+      <h3 class="text-lg font-semibold mb-1">Indian Space Research Organisation (ISRO)</h3>
+      <p class="text-[#38bdf8] text-sm font-mono mb-2">Electronics Intern — Jun 2024 – Jul 2024</p>
+      <p class="text-slate-400 text-sm leading-relaxed">Developed LabVIEW-based automation tools for the stage checkout system of the C-32 second stage (HRLV). Improved reliability and reduced manual intervention in safety-critical pre-launch testing workflows by automating test procedures and validation sequences.</p>
+     </div>
+     <div class="exp-item glass-card p-6">
+      <h3 class="text-lg font-semibold mb-1">Infinity Arsenal Private Limited</h3>
+      <p class="text-[#8b5cf6] text-sm font-mono mb-2">AI Intern — Nov 2024 – Jun 2025</p>
+      <p class="text-slate-400 text-sm leading-relaxed">Designed and implemented a real-time UAV detection system using YOLO and OpenCV. Built a complete detection pipeline with Roboflow dataset augmentation, achieving 91% accuracy in identifying drones in real-world conditions with optimized inference performance.</p>
+     </div>
+    </div>
+   </section><!-- Research & Contributions -->
+   <div class="section-line mx-auto max-w-5xl"></div>
+   <section id="research" class="max-w-5xl mx-auto px-6 py-24 reveal">
+    <h2 class="text-3xl font-bold mb-2 flex items-center gap-3"><i data-lucide="beaker" style="width:28px;height:28px;color:#38bdf8;"></i> Research &amp; Contributions</h2>
+    <div class="w-16 h-1 bg-gradient-to-r from-[#38bdf8] to-[#8b5cf6] rounded mb-10"></div>
+    <div class="glass-card p-6">
+     <h3 class="text-lg font-semibold mb-3 flex items-center gap-2"><i data-lucide="rocket" style="width:18px;height:18px;color:#22d3ee;"></i> AI-Based Autonomous UAV Navigation System</h3>
+     <p class="text-slate-400 text-sm leading-relaxed mb-4">Contributed to development of autonomous UAV navigation system integrating A* path planning, reinforcement learning, and multi-sensor fusion for real-time navigation. Co-authored research paper currently under review at international conference.</p>
+     <div class="flex flex-wrap gap-2">
+      <span class="accent-pill-cyan text-xs px-2 py-1 rounded">A* Planning</span><span class="accent-pill-cyan text-xs px-2 py-1 rounded">Reinforcement Learning</span><span class="accent-pill-cyan text-xs px-2 py-1 rounded">Sensor Fusion</span><span class="accent-pill-cyan text-xs px-2 py-1 rounded">Research Paper</span>
+     </div>
+    </div>
+   </section><!-- Achievements -->
+   <div class="section-line mx-auto max-w-5xl"></div>
+   <section class="max-w-5xl mx-auto px-6 py-24 reveal">
+    <h2 class="text-3xl font-bold mb-2 flex items-center gap-3"><i data-lucide="award" style="width:28px;height:28px;color:#38bdf8;"></i> Achievements</h2>
+    <div class="w-16 h-1 bg-gradient-to-r from-[#38bdf8] to-[#8b5cf6] rounded mb-10"></div>
+    <div class="grid md:grid-cols-2 gap-6">
+     <div class="glass-card p-6 flex items-start gap-4">
+      <div class="mt-1"><i data-lucide="star" style="width:22px;height:22px;color:#facc15;"></i>
+      </div>
+      <div>
+       <h3 class="font-semibold mb-1">Asteroid Detection — IASC × NASA</h3>
+       <p class="text-slate-400 text-sm">Detected 3 preliminary asteroid candidates through International Astronomical Search Collaboration in partnership with NASA. Observations verified by international review teams.</p>
+      </div>
+     </div>
+     <div class="glass-card p-6 flex items-start gap-4">
+      <div class="mt-1"><i data-lucide="book-open" style="width:22px;height:22px;color:#facc15;"></i>
+      </div>
+      <div>
+       <h3 class="font-semibold mb-1">India Book of Records</h3>
+       <p class="text-slate-400 text-sm">Contributed to coordination and execution of large-scale IPR filing event recognized in India Book of Records with participation impact.</p>
       </div>
      </div>
     </div>
-   </section><!-- Contact CTA -->
-   <section class="gradient-bg text-white py-16 px-6">
-    <div class="max-w-4xl mx-auto text-center">
-     <h2 class="text-4xl font-bold mb-6">Ready to Launch Something Amazing?</h2>
-     <p class="text-xl mb-8 opacity-90">Let's collaborate on aerospace, AI, or embedded systems projects!</p>
-     <div class="flex flex-wrap justify-center gap-4"><a href="mailto:elonspacex2002@gmail.com" class="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold btn-interactive flex items-center gap-2"> <span class="relative z-10">📧 Get In Touch</span> </a> <a href="https://www.linkedin.com/in/ashwin-kumar-b-d22m03y2005" target="_blank" rel="noopener noreferrer" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold btn-interactive flex items-center gap-2"> <span class="relative z-10">💼 Connect on LinkedIn</span> </a>
+   </section><!-- Contact -->
+   <div class="section-line mx-auto max-w-5xl"></div>
+   <section id="contact" class="max-w-5xl mx-auto px-6 py-24 reveal">
+    <h2 class="text-3xl font-bold mb-2 flex items-center gap-3"><i data-lucide="mail" style="width:28px;height:28px;color:#38bdf8;"></i> Contact</h2>
+    <div class="w-16 h-1 bg-gradient-to-r from-[#38bdf8] to-[#8b5cf6] rounded mb-10"></div>
+    <div class="glass-card p-8">
+     <div class="grid md:grid-cols-3 gap-6 mb-8">
+      <a id="el-contact-email" href="mailto:ashwin@example.com" class="flex items-center gap-3 text-slate-300 hover:text-[#38bdf8] transition-colors"> <i data-lucide="mail" style="width:20px;height:20px;"></i> <span>ashwin@example.com</span> </a> <a id="el-contact-linkedin" href="https://linkedin.com/in/ashwinkumarb" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-slate-300 hover:text-[#38bdf8] transition-colors"> <i data-lucide="linkedin" style="width:20px;height:20px;"></i> <span>LinkedIn</span> </a> <a id="el-contact-github" href="https://github.com/ashwinkumarb" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-slate-300 hover:text-[#38bdf8] transition-colors"> <i data-lucide="github" style="width:20px;height:20px;"></i> <span>GitHub</span> </a>
+     </div>
+     <div class="text-center">
+      <a href="#" id="resume-btn" class="btn-primary inline-flex"><i data-lucide="download" style="width:18px;height:18px;"></i> Download Resume</a>
      </div>
     </div>
-   </section>
-  </main>
+   </section><!-- Footer -->
+   <footer class="text-center py-8 text-slate-600 text-sm border-t border-white/5">
+    <p class="font-mono">© 2025 Ashwin Kumar B — Engineered with precision.</p>
+   </footer>
+  </div>
   <script>
-        // Configuration object for editable content
-        const defaultConfig = {
-            name: "B. Ashwin Kumar",
-            title: "Aerospace Engineer & AI Specialist",
-            location: "Chennai, Tamil Nadu",
-            email: "elonspacex2002@gmail.com",
-            phone: "+91-9884922037",
-            linkedin: "https://www.linkedin.com/in/ashwin-kumar-b-d22m03y2005",
-            github: "https://github.com/Ashpathfinder",
-            summary_title: "Professional Summary",
-            experience_title: "Experience",
-            projects_title: "Featured Projects",
-            skills_title: "Technical Skills",
-            background_color: "#667eea",
-            surface_color: "#ffffff",
-            text_color: "#374151",
-            primary_action_color: "#4f46e5",
-            secondary_action_color: "#6b7280",
-            font_family: "Inter",
-            font_size: 16
-        };
+// Particles
+(function() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.top = Math.random() * 100 + '%';
+    p.style.animationDuration = (6 + Math.random() * 10) + 's';
+    p.style.animationDelay = Math.random() * 8 + 's';
+    container.appendChild(p);
+  }
+})();
 
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles-container');
-            if (!particlesContainer) return;
-            
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Mouse parallax effect
-        function initParallax() {
-            document.addEventListener('mousemove', (e) => {
-                const parallaxElements = document.querySelectorAll('.parallax');
-                const x = e.clientX / window.innerWidth;
-                const y = e.clientY / window.innerHeight;
-                
-                parallaxElements.forEach((element, index) => {
-                    const speed = (index + 1) * 0.5;
-                    const xPos = (x - 0.5) * speed;
-                    const yPos = (y - 0.5) * speed;
-                    element.style.transform = `translate(${xPos}px, ${yPos}px)`;
-                });
-            });
-        }
+// Mobile menu
+document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.toggle('hidden');
+});
+document.querySelectorAll('#mobile-menu a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden'));
+});
 
-        // Enhanced scroll animations with stagger effect
-        function handleScrollAnimations() {
-            const sections = document.querySelectorAll('.section-fade');
-            
-            // Make all sections visible immediately
-            sections.forEach(section => {
-                section.classList.add('visible');
-            });
-            
-            // Optional: Add intersection observer for future animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
+// Resume button placeholder
+document.getElementById('resume-btn').addEventListener('click', (e) => {
+  e.preventDefault();
+  const btn = e.currentTarget;
+  btn.innerHTML = '<i data-lucide="check" style="width:18px;height:18px;"></i> Resume link not set yet';
+  lucide.createIcons();
+  setTimeout(() => {
+    btn.innerHTML = '<i data-lucide="download" style="width:18px;height:18px;"></i> Download Resume';
+    lucide.createIcons();
+  }, 2000);
+});
 
-            sections.forEach(section => observer.observe(section));
-        }
+// Active nav on scroll
+const sections = ['about','skills','projects','experience','research','contact'];
+const root = document.getElementById('app-root');
+root.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top < 200) current = id;
+  });
+  document.querySelectorAll('.nav-link').forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+});
 
-        // Smooth scrolling for internal links
-        function initSmoothScrolling() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-        }
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
 
-        // Interactive skill bars
-        function initSkillBars() {
-            const skillContainers = document.querySelectorAll('.skill-container');
-            skillContainers.forEach(container => {
-                container.addEventListener('click', () => {
-                    const skillBar = container.querySelector('.skill-bar');
-                    skillBar.style.animation = 'none';
-                    setTimeout(() => {
-                        skillBar.style.animation = 'fillBar 1s ease-out, skillShine 1s ease-out 0.2s';
-                    }, 10);
-                });
-            });
-        }
+lucide.createIcons();
 
-        // Rocket click effect
-        function initRocketInteraction() {
-            const rocket = document.querySelector('.rocket-icon');
-            if (rocket) {
-                rocket.addEventListener('click', () => {
-                    // Create temporary particles
-                    for (let i = 0; i < 10; i++) {
-                        const spark = document.createElement('div');
-                        spark.style.position = 'absolute';
-                        spark.style.width = '4px';
-                        spark.style.height = '4px';
-                        spark.style.background = 'white';
-                        spark.style.borderRadius = '50%';
-                        spark.style.pointerEvents = 'none';
-                        spark.style.left = '50%';
-                        spark.style.top = '50%';
-                        
-                        const angle = (i / 10) * Math.PI * 2;
-                        const velocity = 50 + Math.random() * 50;
-                        const vx = Math.cos(angle) * velocity;
-                        const vy = Math.sin(angle) * velocity;
-                        
-                        rocket.parentElement.appendChild(spark);
-                        
-                        let x = 0, y = 0;
-                        const animate = () => {
-                            x += vx * 0.02;
-                            y += vy * 0.02;
-                            spark.style.transform = `translate(${x}px, ${y}px)`;
-                            spark.style.opacity = Math.max(0, 1 - Math.abs(x + y) / 100);
-                            
-                            if (spark.style.opacity > 0) {
-                                requestAnimationFrame(animate);
-                            } else {
-                                spark.remove();
-                            }
-                        };
-                        animate();
-                    }
-                });
-            }
-        }
+// Element SDK
+const defaultConfig = {
+  hero_name: 'Ashwin Kumar B',
+  hero_title: 'Avionics & AI Engineer | Flight Systems & Intelligent Monitoring',
+  hero_tagline: '"Building safety-critical systems where reliability is non-negotiable."',
+  about_text: 'Systems engineer with hands-on experience designing flight computers, real-time telemetry architectures, and AI-driven monitoring pipelines. Completed an electronics internship at ISRO, automating stage checkout procedures for the HRLV C-32 second stage. My work sits at the intersection of embedded systems, sensor fusion, and machine learning—building solutions where failure margins are measured in milliseconds and correctness is verified, not assumed. Every system I ship is tested under fault conditions before it earns trust.',
+  contact_email: 'ashwin@example.com',
+  contact_linkedin: 'https://linkedin.com/in/ashwinkumarb',
+  contact_github: 'https://github.com/ashwinkumarb',
+  background_color: '#07080f',
+  surface_color: '#0f172a',
+  text_color: '#e2e8f0',
+  accent_color: '#38bdf8',
+  secondary_accent: '#8b5cf6',
+  font_family: 'Outfit',
+  font_size: 16
+};
 
-        // Initialize animations and interactions
-        function init() {
-            createParticles();
-            handleScrollAnimations();
-            initSmoothScrolling();
-            initSkillBars();
-            initRocketInteraction();
-            initParallax();
-        }
+function applyConfig(config) {
+  const c = { ...defaultConfig, ...config };
+  document.getElementById('el-hero-name').textContent = c.hero_name;
+  document.getElementById('el-hero-title').textContent = c.hero_title;
+  document.getElementById('el-hero-tagline').textContent = c.hero_tagline;
+  document.getElementById('el-about-text').textContent = c.about_text;
 
-        // Element SDK configuration
-        async function onConfigChange(config) {
-            // Update hero section
-            const heroName = document.getElementById('hero-name');
-            const heroTitle = document.getElementById('hero-title');
-            const heroLocation = document.getElementById('hero-location');
-            const heroEmail = document.getElementById('hero-email');
-            const heroPhone = document.getElementById('hero-phone');
-            const heroLinkedin = document.getElementById('hero-linkedin');
-            const heroGithub = document.getElementById('hero-github');
+  const emailEl = document.getElementById('el-contact-email');
+  emailEl.href = 'mailto:' + c.contact_email;
+  emailEl.querySelector('span').textContent = c.contact_email;
 
-            if (heroName) heroName.textContent = config.name || defaultConfig.name;
-            if (heroTitle) heroTitle.textContent = config.title || defaultConfig.title;
-            if (heroLocation) heroLocation.textContent = config.location || defaultConfig.location;
-            if (heroPhone) heroPhone.textContent = config.phone || defaultConfig.phone;
-            
-            if (heroEmail) {
-                heroEmail.textContent = config.email || defaultConfig.email;
-                heroEmail.href = `mailto:${config.email || defaultConfig.email}`;
-            }
-            
-            if (heroLinkedin) {
-                heroLinkedin.href = config.linkedin || defaultConfig.linkedin;
-            }
-            
-            if (heroGithub) {
-                heroGithub.href = config.github || defaultConfig.github;
-            }
+  const liEl = document.getElementById('el-contact-linkedin');
+  liEl.href = c.contact_linkedin;
 
-            // Update section titles
-            const summaryTitle = document.getElementById('summary-title');
-            const experienceTitle = document.getElementById('experience-title');
-            const projectsTitle = document.getElementById('projects-title');
-            const skillsTitle = document.getElementById('skills-title');
+  const ghEl = document.getElementById('el-contact-github');
+  ghEl.href = c.contact_github;
 
-            if (summaryTitle) summaryTitle.textContent = config.summary_title || defaultConfig.summary_title;
-            if (experienceTitle) experienceTitle.textContent = config.experience_title || defaultConfig.experience_title;
-            if (projectsTitle) projectsTitle.textContent = config.projects_title || defaultConfig.projects_title;
-            if (skillsTitle) skillsTitle.textContent = config.skills_title || defaultConfig.skills_title;
+  // Colors
+  document.body.style.background = c.background_color;
+  document.getElementById('app-root').style.color = c.text_color;
 
-            // Apply colors
-            const gradientBgs = document.querySelectorAll('.gradient-bg');
-            const bgColor = config.background_color || defaultConfig.background_color;
-            const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
-            
-            gradientBgs.forEach(el => {
-                el.style.background = `linear-gradient(135deg, ${bgColor} 0%, ${primaryColor} 100%)`;
-            });
+  // Font
+  const fontStack = c.font_family + ', Outfit, sans-serif';
+  document.body.style.fontFamily = fontStack;
 
-            // Apply font family
-            const customFont = config.font_family || defaultConfig.font_family;
-            const baseFontStack = 'system-ui, -apple-system, sans-serif';
-            document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+  // Font size scaling
+  const base = c.font_size;
+  document.querySelectorAll('.text-sm').forEach(el => el.style.fontSize = (base * 0.875) + 'px');
+}
 
-            // Apply font size scaling
-            const baseSize = config.font_size || defaultConfig.font_size;
-            document.documentElement.style.fontSize = `${baseSize}px`;
-        }
-
-        function mapToCapabilities(config) {
-            return {
-                recolorables: [
-                    {
-                        get: () => config.background_color || defaultConfig.background_color,
-                        set: (value) => {
-                            config.background_color = value;
-                            if (window.elementSdk) {
-                                window.elementSdk.setConfig({ background_color: value });
-                            }
-                        }
-                    },
-                    {
-                        get: () => config.surface_color || defaultConfig.surface_color,
-                        set: (value) => {
-                            config.surface_color = value;
-                            if (window.elementSdk) {
-                                window.elementSdk.setConfig({ surface_color: value });
-                            }
-                        }
-                    },
-                    {
-                        get: () => config.text_color || defaultConfig.text_color,
-                        set: (value) => {
-                            config.text_color = value;
-                            if (window.elementSdk) {
-                                window.elementSdk.setConfig({ text_color: value });
-                            }
-                        }
-                    },
-                    {
-                        get: () => config.primary_action_color || defaultConfig.primary_action_color,
-                        set: (value) => {
-                            config.primary_action_color = value;
-                            if (window.elementSdk) {
-                                window.elementSdk.setConfig({ primary_action_color: value });
-                            }
-                        }
-                    }
-                ],
-                borderables: [],
-                fontEditable: {
-                    get: () => config.font_family || defaultConfig.font_family,
-                    set: (value) => {
-                        config.font_family = value;
-                        if (window.elementSdk) {
-                            window.elementSdk.setConfig({ font_family: value });
-                        }
-                    }
-                },
-                fontSizeable: {
-                    get: () => config.font_size || defaultConfig.font_size,
-                    set: (value) => {
-                        config.font_size = value;
-                        if (window.elementSdk) {
-                            window.elementSdk.setConfig({ font_size: value });
-                        }
-                    }
-                }
-            };
-        }
-
-        function mapToEditPanelValues(config) {
-            return new Map([
-                ["name", config.name || defaultConfig.name],
-                ["title", config.title || defaultConfig.title],
-                ["location", config.location || defaultConfig.location],
-                ["email", config.email || defaultConfig.email],
-                ["phone", config.phone || defaultConfig.phone],
-                ["linkedin", config.linkedin || defaultConfig.linkedin],
-                ["github", config.github || defaultConfig.github],
-                ["summary_title", config.summary_title || defaultConfig.summary_title],
-                ["experience_title", config.experience_title || defaultConfig.experience_title],
-                ["projects_title", config.projects_title || defaultConfig.projects_title],
-                ["skills_title", config.skills_title || defaultConfig.skills_title]
-            ]);
-        }
-
-        // Initialize Element SDK
-        if (window.elementSdk) {
-            window.elementSdk.init({
-                defaultConfig,
-                onConfigChange,
-                mapToCapabilities,
-                mapToEditPanelValues
-            });
-        }
-
-        // Project data for detailed views
-        const projectData = {
-            titan: {
-                title: "TITAN Flight Computer",
-                icon: "🖥️",
-                overview: "The TITAN Flight Computer represents a cutting-edge avionics system specifically engineered for student rocketry applications. This sophisticated embedded system combines real-time sensor fusion, autonomous decision-making, and robust telemetry capabilities to ensure mission success and safety. Built around the ESP32-S3 architecture, TITAN serves as the central nervous system for rocket operations, from pre-flight checks through recovery.",
-                images: [
-                    {
-                        url: "https://via.placeholder.com/600x400/4f46e5/ffffff?text=TITAN+Flight+Computer+PCB",
-                        caption: "TITAN Flight Computer PCB Layout - Custom designed 4-layer board with integrated sensors"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/7c3aed/ffffff?text=System+Architecture",
-                        caption: "System Architecture Diagram - Showing sensor integration and data flow"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/059669/ffffff?text=Flight+Test+Setup",
-                        caption: "Flight Test Configuration - TITAN mounted in rocket airframe with antenna"
-                    }
-                ],
-                technicalSpecs: {
-                    "Microcontroller": "ESP32-S3 Feather (240MHz dual-core, 8MB PSRAM)",
-                    "Sensors": "BMI088 6-DOF IMU, BMP388 Barometer, NEO-8M GPS",
-                    "Communication": "915MHz LoRa radio, 2.4GHz WiFi backup",
-                    "Storage": "32GB microSD card for flight data logging",
-                    "Power": "3.7V LiPo with integrated charging circuit",
-                    "Operating Range": "-40°C to +85°C, 0-30km altitude",
-                    "Sampling Rate": "1kHz IMU, 100Hz GPS, 50Hz telemetry",
-                    "Dimensions": "85mm x 55mm x 20mm"
-                },
-                details: [
-                    "**Advanced Sensor Fusion**: Implements Extended Kalman Filter (EKF) combining IMU accelerometer/gyroscope data with barometric altitude and GPS position for optimal state estimation accuracy of ±0.5m altitude and ±0.1m/s velocity",
-                    "**Finite State Machine Architecture**: Custom FSM with 8 distinct flight phases (Pre-flight, Armed, Boost, Coast, Apogee, Drogue, Main, Landed) ensuring proper event sequencing and fail-safe operation",
-                    "**Real-time Telemetry System**: Bi-directional 915MHz LoRa communication transmitting 50Hz telemetry packets including position, velocity, acceleration, orientation, and system health status",
-                    "**Autonomous Recovery System**: Dual-deployment parachute system with barometric and accelerometer-based apogee detection, backup timer deployment, and manual override capability",
-                    "**High-G Survivability**: Designed to withstand 30G acceleration loads with shock-mounted sensor assembly and ruggedized PCB construction using aerospace-grade components",
-                    "**Comprehensive Data Logging**: Records 1000+ parameters per second to microSD including raw sensor data, filtered estimates, control decisions, and system diagnostics for post-flight analysis",
-                    "**Modular Software Architecture**: Built on FreeRTOS with separate tasks for sensor acquisition, state estimation, telemetry, logging, and recovery control enabling real-time performance guarantees",
-                    "**Ground Support Equipment**: Integrated with custom ground station software for pre-flight configuration, real-time monitoring, and post-flight data analysis"
-                ],
-                technologies: ["ESP32-S3 Feather", "C/C++", "FreeRTOS", "Extended Kalman Filter", "BMI088 IMU", "BMP388 Barometer", "NEO-8M GPS", "LoRa Radio", "microSD Logging", "Altus Metrum Integration"],
-                challenges: "The primary technical challenges included achieving microsecond-precision timing for sensor fusion algorithms while maintaining real-time performance, implementing robust state estimation that remains accurate during high-dynamic flight phases, ensuring reliable radio communication through plasma effects during boost phase, and developing fail-safe recovery algorithms that work across diverse flight profiles and environmental conditions.",
-                impact: "TITAN enables student rocketry teams to conduct sophisticated flight experiments with professional-grade avionics at a fraction of commercial costs. The system has been designed for reusability and modularity, allowing teams to iterate rapidly on rocket designs while maintaining consistent, reliable flight data collection for performance optimization and safety validation.",
-                timeline: "January 2024 - Present",
-                status: "Flight Testing Phase",
-                githubUrl: "https://github.com/Ashpathfinder/TITAN-Flight-Computer",
-                documentation: "Complete technical documentation including schematics, PCB layouts, software architecture, and flight test procedures available in project repository."
-            },
-            uav: {
-                title: "AI UAV Detection System",
-                icon: "🛸",
-                overview: "A sophisticated computer vision and machine learning system designed for real-time detection, classification, and tracking of unmanned aerial vehicles (UAVs) in complex environments. This system leverages state-of-the-art YOLO v8 architecture combined with advanced image processing techniques to provide robust drone detection capabilities for security and surveillance applications. The system is optimized for edge deployment with real-time performance requirements.",
-                images: [
-                    {
-                        url: "https://via.placeholder.com/600x400/ef4444/ffffff?text=YOLO+Detection+Results",
-                        caption: "Real-time UAV detection results showing bounding boxes and confidence scores"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/f59e0b/ffffff?text=Training+Dataset",
-                        caption: "Annotated training dataset with various drone types and environmental conditions"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/10b981/ffffff?text=System+Architecture",
-                        caption: "AI pipeline architecture showing data flow from camera input to detection output"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/8b5cf6/ffffff?text=Performance+Metrics",
-                        caption: "Model performance analysis including precision, recall, and mAP scores"
-                    }
-                ],
-                technicalSpecs: {
-                    "Model Architecture": "YOLO v8n/s/m variants with custom anchor optimization",
-                    "Input Resolution": "640x640 pixels, RGB color space",
-                    "Detection Classes": "15+ drone types (DJI, Parrot, custom builds, military)",
-                    "Inference Speed": "45-60 FPS on RTX 3060, 25-30 FPS on edge devices",
-                    "Detection Range": "50m-2km depending on drone size and camera setup",
-                    "Accuracy Metrics": "mAP@0.5: 89.2%, mAP@0.5:0.95: 67.8%",
-                    "Minimum Drone Size": "10x10 pixels (approximately 20cm drone at 500m)",
-                    "Operating Conditions": "Day/night, various weather conditions"
-                },
-                details: [
-                    "**Custom YOLO v8 Implementation**: Fine-tuned YOLO v8 model on 15,000+ annotated drone images covering 15 different UAV categories including commercial, military, and custom-built drones with data augmentation techniques for improved generalization",
-                    "**Multi-Scale Detection Pipeline**: Implemented pyramid feature networks enabling detection of drones ranging from 10x10 pixels to full-frame objects, with specialized small object detection optimizations for long-range surveillance",
-                    "**Real-Time Tracking Integration**: Combined YOLO detection with DeepSORT tracking algorithm providing persistent object IDs, trajectory prediction, and occlusion handling for continuous monitoring of multiple simultaneous targets",
-                    "**Advanced Data Preprocessing**: Developed comprehensive preprocessing pipeline including noise reduction, contrast enhancement, motion blur compensation, and atmospheric distortion correction for optimal detection performance",
-                    "**Edge Optimization**: Implemented TensorRT optimization and quantization techniques reducing model size by 60% while maintaining 95% of original accuracy, enabling deployment on NVIDIA Jetson and similar edge computing platforms",
-                    "**False Positive Reduction**: Created multi-stage validation system using temporal consistency, size constraints, and motion pattern analysis reducing false positive rate from 12% to under 2% in real-world scenarios",
-                    "**Automated Annotation Pipeline**: Built semi-automated labeling system using Roboflow API and custom Python scripts, reducing manual annotation time by 70% while maintaining high-quality ground truth data",
-                    "**Performance Monitoring**: Integrated comprehensive logging and metrics collection system tracking detection accuracy, processing latency, and system resource utilization for continuous optimization"
-                ],
-                technologies: ["Python 3.9+", "YOLO v8", "PyTorch", "OpenCV 4.8", "Roboflow", "TensorRT", "DeepSORT", "NumPy", "Matplotlib", "CUDA", "Docker", "FastAPI"],
-                challenges: "Key technical challenges included achieving consistent detection performance across varying atmospheric conditions (fog, rain, glare), distinguishing small drones from birds and other flying objects, maintaining real-time performance on resource-constrained edge devices, handling motion blur from fast-moving targets, and developing robust tracking algorithms that maintain object identity through occlusions and rapid maneuvers.",
-                impact: "This system significantly enhances perimeter security for critical infrastructure, airports, and military installations by providing automated early warning capabilities. The solution reduces human operator workload by 80% while improving detection reliability and response times. The modular architecture allows for easy integration with existing security systems and scalable deployment across multiple monitoring stations.",
-                timeline: "October 2024 - July 2025",
-                status: "Beta Testing Phase",
-                githubUrl: "https://github.com/Ashpathfinder/UAV-Detection-System",
-                documentation: "Comprehensive documentation including model training procedures, deployment guides, API documentation, and performance benchmarking results available in project repository.",
-                demoUrl: "https://uav-detection-demo.herokuapp.com",
-                publications: "Research paper submitted to IEEE Conference on Computer Vision and Pattern Recognition (CVPR) 2025"
-            },
-            rocketpath: {
-                title: "ROCKETPATH Simulator",
-                icon: "📊",
-                overview: "ROCKETPATH is a comprehensive, high-fidelity rocket trajectory simulation and analysis platform designed for student rocketry teams and aerospace education. This sophisticated tool combines advanced physics modeling, atmospheric simulation, and statistical analysis to provide accurate flight predictions and performance optimization capabilities. The simulator supports complex multi-stage rockets, various propulsion systems, and detailed environmental modeling for mission planning and design validation.",
-                images: [
-                    {
-                        url: "https://via.placeholder.com/600x400/3b82f6/ffffff?text=Trajectory+Visualization",
-                        caption: "3D trajectory visualization showing flight path, velocity vectors, and key flight events"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/10b981/ffffff?text=Performance+Analysis",
-                        caption: "Comprehensive performance analysis dashboard with thrust curves and efficiency metrics"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/f59e0b/ffffff?text=Monte+Carlo+Results",
-                        caption: "Monte Carlo simulation results showing landing dispersion patterns and probability distributions"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/8b5cf6/ffffff?text=Multi-Stage+Simulation",
-                        caption: "Multi-stage rocket simulation with stage separation dynamics and payload deployment"
-                    }
-                ],
-                technicalSpecs: {
-                    "Physics Engine": "6-DOF dynamics with quaternion-based attitude representation",
-                    "Atmospheric Model": "1976 US Standard Atmosphere with wind profiles",
-                    "Drag Modeling": "Supersonic/subsonic transition with Mach-dependent coefficients",
-                    "Propulsion": "Solid, liquid, and hybrid motor support with custom thrust curves",
-                    "Simulation Timestep": "Adaptive Runge-Kutta 4th order (0.001-0.1s)",
-                    "Altitude Range": "0-100km with space environment modeling",
-                    "Monte Carlo": "10,000+ runs with statistical convergence analysis",
-                    "Output Formats": "CSV, JSON, HDF5, and custom binary formats"
-                },
-                details: [
-                    "**Advanced Physics Engine**: Implements full 6-degree-of-freedom (6-DOF) rigid body dynamics using quaternion-based attitude representation, accounting for aerodynamic forces, gravitational variations, Coriolis effects, and gyroscopic moments for high-fidelity trajectory prediction",
-                    "**Comprehensive Atmospheric Modeling**: Incorporates 1976 US Standard Atmosphere model with altitude-dependent temperature, pressure, and density profiles, plus real-time wind data integration and atmospheric turbulence modeling for realistic flight conditions",
-                    "**Multi-Stage Rocket Support**: Handles complex staging sequences with configurable separation dynamics, inter-stage timing, payload deployment, and mass property updates, supporting up to 5 stages with independent propulsion systems",
-                    "**Advanced Propulsion Modeling**: Supports solid, liquid, and hybrid rocket motors with custom thrust curve imports, nozzle expansion modeling, specific impulse calculations, and propellant mass flow rate analysis for accurate performance prediction",
-                    "**Sophisticated Drag Analysis**: Implements Mach-dependent drag coefficient modeling with supersonic/subsonic transition handling, base drag calculations, and fin-induced drag effects using computational fluid dynamics (CFD) correlation methods",
-                    "**Monte Carlo Statistical Analysis**: Performs large-scale uncertainty quantification with 10,000+ simulation runs, analyzing parameter sensitivity, landing dispersion patterns, and mission success probability with statistical convergence validation",
-                    "**Real-Time Visualization Engine**: Features interactive 3D trajectory plotting, real-time parameter monitoring, customizable dashboard layouts, and export capabilities for presentations and technical reports",
-                    "**Optimization Algorithms**: Integrates genetic algorithms and gradient-based optimization for rocket design parameter tuning, trajectory optimization, and mission constraint satisfaction with multi-objective optimization capabilities"
-                ],
-                technologies: ["Python 3.9+", "NumPy", "SciPy", "Matplotlib", "Plotly", "Pandas", "SymPy", "Numba", "HDF5", "PyQt5", "OpenGL", "Cython"],
-                challenges: "Major technical challenges included developing numerically stable integration schemes for stiff differential equations during rapid acceleration phases, implementing accurate atmospheric modeling that accounts for seasonal and geographic variations, creating efficient algorithms for Monte Carlo analysis that maintain statistical significance while minimizing computational time, and designing a modular architecture that supports diverse rocket configurations without sacrificing simulation accuracy.",
-                impact: "ROCKETPATH has become an essential tool for student rocketry teams, enabling them to optimize rocket designs before expensive hardware testing. The simulator has helped teams achieve 95% flight success rates by identifying potential issues during the design phase. The tool has been adopted by 15+ universities and has contributed to successful launches at competitions including IREC, NASA SLI, and Spaceport America Cup.",
-                timeline: "March 2024 - September 2024",
-                status: "Production Release v2.1",
-                githubUrl: "https://github.com/Ashpathfinder/ROCKETPATH-Simulator",
-                documentation: "Complete user manual, API documentation, validation test cases, and example simulations available. Includes tutorials for beginners and advanced configuration guides.",
-                downloads: "500+ downloads from aerospace engineering community",
-                validation: "Validated against real flight data from 25+ rocket flights with average trajectory prediction accuracy of 97.3%"
-            },
-            turboflow: {
-                title: "Turboflow Ground Station",
-                icon: "📡",
-                overview: "Turboflow is a professional-grade ground station software suite designed for real-time rocket telemetry monitoring, data visualization, and mission control operations. This comprehensive system provides mission-critical capabilities for student rocketry teams, enabling safe flight operations through real-time data monitoring, automated alert systems, and comprehensive post-flight analysis tools. The platform supports multiple communication protocols and can simultaneously monitor multiple vehicles.",
-                images: [
-                    {
-                        url: "https://via.placeholder.com/600x400/06b6d4/ffffff?text=Real-Time+Dashboard",
-                        caption: "Main telemetry dashboard showing live flight data, GPS tracking, and system status"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/84cc16/ffffff?text=GPS+Mapping",
-                        caption: "Integrated GPS mapping with flight path visualization and landing prediction"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/f97316/ffffff?text=Data+Analysis",
-                        caption: "Post-flight analysis tools with customizable plots and statistical analysis"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/ec4899/ffffff?text=Multi-Vehicle+Monitoring",
-                        caption: "Multi-vehicle monitoring interface for complex missions and competitions"
-                    }
-                ],
-                technicalSpecs: {
-                    "Communication Protocols": "Serial (RS232/485), LoRa, WiFi, Bluetooth, TCP/IP",
-                    "Data Rate": "Up to 1000 packets/second with automatic flow control",
-                    "Supported Formats": "Custom binary, NMEA, MAVLink, and user-defined protocols",
-                    "Real-time Performance": "<10ms latency for critical parameter updates",
-                    "Database": "SQLite with automatic backup and data integrity checking",
-                    "Map Integration": "OpenStreetMap, Google Maps, USGS topographic maps",
-                    "Alert System": "Audio, visual, email, and SMS notifications",
-                    "Multi-Vehicle": "Simultaneous monitoring of up to 8 vehicles"
-                },
-                details: [
-                    "**Advanced Communication Stack**: Implements robust multi-protocol communication system supporting Serial (RS232/RS485), LoRa radio, WiFi, Bluetooth, and TCP/IP connections with automatic failover, packet loss detection, and error correction for reliable data transmission in challenging RF environments",
-                    "**Real-Time Data Processing**: Features high-performance data processing engine capable of handling 1000+ telemetry packets per second with sub-10ms latency, including real-time filtering, smoothing, and derived parameter calculations for immediate situational awareness",
-                    "**Interactive Mapping System**: Integrates multiple mapping providers (OpenStreetMap, Google Maps, USGS) with real-time GPS tracking, flight path visualization, landing prediction algorithms, and geofencing capabilities for range safety and recovery operations",
-                    "**Comprehensive Alert Framework**: Implements intelligent alert system with configurable thresholds for all telemetry parameters, supporting audio alerts, visual notifications, email/SMS integration, and automated emergency response protocols for mission safety",
-                    "**Multi-Vehicle Operations**: Supports simultaneous monitoring of up to 8 vehicles with independent data streams, synchronized timeline visualization, and coordinated mission management capabilities for complex operations and competitions",
-                    "**Advanced Data Visualization**: Features customizable dashboard with 15+ chart types, real-time plotting, historical data overlay, statistical analysis tools, and export capabilities for technical presentations and post-flight reports",
-                    "**Robust Data Management**: Implements SQLite database with automatic data backup, integrity checking, compression algorithms, and export functionality supporting CSV, JSON, MATLAB, and custom formats for comprehensive data analysis",
-                    "**Plugin Architecture**: Modular design allows custom plugins for specific rocket configurations, specialized sensors, and mission-specific requirements with hot-swappable components and API integration capabilities"
-                ],
-                technologies: ["Python 3.9+", "PyQt5/PySide6", "SQLite", "NumPy", "Matplotlib", "Folium", "PySerial", "LoRa Libraries", "Threading", "Asyncio", "Pandas", "SciPy"],
-                challenges: "Primary technical challenges included developing robust communication protocols that maintain reliability in high-RF environments typical of launch sites, implementing real-time data processing that scales with increasing telemetry rates without dropping packets, creating intuitive user interfaces that present complex data clearly during high-stress flight operations, and ensuring system stability during extended operations with automatic error recovery and graceful degradation.",
-                impact: "Turboflow has become the standard ground station software for multiple university rocketry programs, enabling safe operations for 100+ rocket flights. The system has prevented 3 potential accidents through early anomaly detection and has improved post-flight analysis efficiency by 75%. The software is currently used by 12 universities and has supported successful flights at major competitions including IREC, NASA SLI, and Spaceport America Cup.",
-                timeline: "June 2024 - December 2024",
-                status: "Production v3.2 - Actively Maintained",
-                githubUrl: "https://github.com/Ashpathfinder/Turboflow-Ground-Station",
-                documentation: "Complete user manual, installation guides, API documentation, and configuration examples. Includes video tutorials and troubleshooting guides.",
-                userBase: "50+ active installations across universities and rocketry clubs",
-                certifications: "Validated for use at NAR/TRA high-power rocket launches and competition events"
-            },
-            asteroid: {
-                title: "Asteroid Search Campaign - Team Starlight",
-                icon: "☄️",
-                overview: "Team Starlight's asteroid search campaign represents a significant contribution to planetary defense and astronomical research through the systematic discovery and characterization of near-Earth asteroids (NEAs). This collaborative project with international observatories utilized advanced image processing techniques, astrometric analysis, and orbital mechanics to identify previously unknown celestial objects. Our team successfully discovered 3 preliminary asteroid candidates that received official recognition from the Minor Planet Center.",
-                images: [
-                    {
-                        url: "https://via.placeholder.com/600x400/1e293b/ffffff?text=Asteroid+Discovery+Images",
-                        caption: "Discovery images showing asteroid motion across multiple observation frames"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/7c2d12/ffffff?text=Astrometric+Analysis",
-                        caption: "Astrometric measurement interface with precise position calculations and error analysis"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/365314/ffffff?text=Orbital+Determination",
-                        caption: "Orbital determination results showing calculated trajectory and uncertainty ellipse"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/581c87/ffffff?text=Team+Collaboration",
-                        caption: "International collaboration network with observatories and research institutions"
-                    }
-                ],
-                technicalSpecs: {
-                    "Observatory Network": "Catalina Sky Survey, LINEAR, NEOWISE collaboration",
-                    "Image Analysis": "1000+ CCD frames analyzed per observation session",
-                    "Detection Sensitivity": "Magnitude 19-22 objects (50m-200m diameter asteroids)",
-                    "Astrometric Precision": "±0.1 arcsecond positional accuracy",
-                    "Observation Period": "6 months intensive campaign (Jan-Jun 2024)",
-                    "Discovery Rate": "3 confirmed preliminary discoveries from 15 candidates",
-                    "Follow-up Observations": "12 observatories worldwide for confirmation",
-                    "Orbital Accuracy": "±0.01 AU semi-major axis uncertainty"
-                },
-                details: [
-                    "**Advanced Image Processing Pipeline**: Developed sophisticated algorithms for asteroid detection using differential photometry, cosmic ray rejection, and statistical background subtraction techniques. Processed over 10,000 CCD images with automated detection of moving objects down to magnitude 22, equivalent to 50-meter diameter asteroids at typical distances",
-                    "**Precision Astrometric Analysis**: Implemented high-precision astrometric measurement system achieving ±0.1 arcsecond accuracy using reference star catalogs (Gaia DR3), atmospheric refraction corrections, and systematic error modeling for reliable position determination across multiple observation epochs",
-                    "**Orbital Mechanics Calculations**: Applied advanced orbital determination methods including least-squares fitting, Gauss's method for preliminary orbits, and Monte Carlo uncertainty analysis to calculate precise orbital elements and assess collision probabilities with Earth over the next century",
-                    "**International Observatory Coordination**: Coordinated follow-up observations with 12 observatories across 6 continents including Catalina Sky Survey, LINEAR, and amateur astronomy networks, ensuring comprehensive tracking and confirmation of discovery candidates through collaborative data sharing protocols",
-                    "**Machine Learning Integration**: Developed neural network-based classification system to distinguish genuine asteroid candidates from image artifacts, satellite trails, and known objects, achieving 94% accuracy in automated screening and reducing false positive rates by 80%",
-                    "**Database Integration**: Integrated with Minor Planet Center (MPC) databases, JPL Small-Body Database, and NEODyS systems for cross-referencing known objects, submission of astrometric observations, and tracking of discovery status through official recognition processes",
-                    "**Statistical Analysis Framework**: Implemented comprehensive statistical analysis tools for population studies, size-frequency distributions, and orbital element correlations contributing to understanding of near-Earth asteroid populations and their evolutionary pathways",
-                    "**Real-Time Alert System**: Developed automated alert system for potentially hazardous objects (PHOs) with rapid notification protocols to international space agencies and observatories for immediate follow-up observations and impact risk assessment"
-                ],
-                technologies: ["Python", "AstroPy", "NumPy", "SciPy", "OpenCV", "Matplotlib", "FITS Image Processing", "Astrometry.net", "PyEphem", "Pandas", "Scikit-learn", "SQL Databases"],
-                challenges: "Major challenges included developing robust algorithms to distinguish genuine asteroid motion from image artifacts in noisy CCD data, achieving sufficient astrometric precision for reliable orbit determination with limited observation arcs, coordinating observations across multiple time zones and weather-dependent facilities, and managing the computational complexity of processing thousands of images while maintaining real-time detection capabilities for fast-moving objects.",
-                impact: "This project significantly contributes to planetary defense by expanding the catalog of known near-Earth asteroids, particularly in the 50-200 meter size range that poses regional impact threats. Our discoveries have been incorporated into global impact monitoring systems and have enhanced statistical models of the NEA population. The work supports NASA's Congressional mandate to catalog 90% of potentially hazardous asteroids and contributes valuable data to international space situational awareness efforts.",
-                timeline: "January 2024 - June 2024",
-                status: "3 Official Preliminary Discoveries (MPC Recognition)",
-                collaborations: "Catalina Sky Survey, LINEAR, Minor Planet Center, International Astronomical Union",
-                publications: "Research findings published in Minor Planet Electronic Circulars (MPEC) and submitted to Icarus journal",
-                recognition: "Official recognition from Minor Planet Center with provisional designations assigned",
-                discoveries: [
-                    "2024 AS47 - Apollo-class NEA, 150m estimated diameter",
-                    "2024 BK23 - Amor-class NEA, 85m estimated diameter", 
-                    "2024 CX12 - Aten-class NEA, 120m estimated diameter"
-                ]
-            },
-            pcb: {
-                title: "Aerospace Power Distribution PCB",
-                icon: "⚡",
-                overview: "The Aerospace Power Distribution PCB represents a sophisticated power management solution specifically engineered for high-reliability rocket avionics systems. This custom-designed board provides multiple regulated voltage rails with advanced protection features, thermal management, and EMI mitigation for mission-critical applications. The design incorporates aerospace-grade components and follows stringent design rules to ensure reliable operation in extreme environments including high-G acceleration, temperature cycling, and electromagnetic interference.",
-                images: [
-                    {
-                        url: "https://via.placeholder.com/600x400/dc2626/ffffff?text=PCB+Layout+Design",
-                        caption: "4-layer PCB layout showing power routing, ground planes, and component placement"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/16a34a/ffffff?text=3D+Rendered+Board",
-                        caption: "3D rendered view of assembled PCB with all components and connectors"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/2563eb/ffffff?text=Thermal+Analysis",
-                        caption: "Thermal simulation results showing heat distribution and cooling performance"
-                    },
-                    {
-                        url: "https://via.placeholder.com/600x400/7c3aed/ffffff?text=Testing+Setup",
-                        caption: "Environmental testing setup with vibration table and thermal chamber"
-                    }
-                ],
-                technicalSpecs: {
-                    "Input Voltage": "7-28V DC (LiPo 2S-6S compatible)",
-                    "Output Rails": "5V@3A, 3.3V@2A, 12V@1A, Variable 6-15V@500mA",
-                    "Efficiency": ">92% typical, >88% across full load range",
-                    "Switching Frequency": "500kHz (optimized for size vs. EMI)",
-                    "Ripple Voltage": "<10mV RMS on all rails",
-                    "Operating Temperature": "-40°C to +85°C",
-                    "Shock/Vibration": "30G operational, 100G survival",
-                    "Dimensions": "65mm x 45mm x 15mm (4-layer PCB)"
-                },
-                details: [
-                    "**Advanced Power Architecture**: Implements sophisticated multi-rail power distribution using synchronous buck converters (TI TPS54531) for 5V and 3.3V rails, boost converter (TI TPS61088) for 12V rail, and adjustable linear regulator (TI TPS7A4700) for variable output, achieving >92% overall efficiency with excellent load regulation",
-                    "**Comprehensive Protection Systems**: Integrates multiple protection mechanisms including input reverse polarity protection (P-channel MOSFET), overcurrent protection (current sense amplifiers), overvoltage protection (TVS diodes), thermal shutdown (integrated temperature sensors), and soft-start circuitry to prevent inrush current damage",
-                    "**Aerospace-Grade Component Selection**: Utilizes military/aerospace qualified components including tantalum capacitors (AVX TAJ series), precision resistors (Vishay CRCW), high-reliability connectors (Samtec), and extended temperature range semiconductors rated for -55°C to +125°C operation",
-                    "**Advanced Thermal Management**: Features optimized thermal design with dedicated ground planes for heat spreading, thermal vias for component cooling, copper pour optimization for current carrying capacity, and provision for external heat sinks on high-power components achieving <40°C rise at full load",
-                    "**EMI/EMC Optimization**: Implements comprehensive EMI mitigation including 4-layer stackup with dedicated power and ground planes, controlled impedance traces, ferrite bead filtering, strategic component placement, and shielding provisions meeting DO-160 aerospace EMC requirements",
-                    "**High-Reliability Design**: Follows IPC-A-610 Class 3 (aerospace) standards with redundant via stitching, teardrops on all vias, minimum 6mil trace/space rules, conformal coating compatibility, and extensive design rule checking (DRC) validation for manufacturing reliability",
-                    "**Modular Integration Interface**: Designed with standardized connectors (JST-XH series) and mounting holes compatible with standard avionics bay configurations, including I2C interface for power monitoring, enable/disable control signals, and status LED indicators for system diagnostics",
-                    "**Comprehensive Testing Protocol**: Underwent extensive validation including thermal cycling (-40°C to +85°C, 100 cycles), vibration testing (20-2000Hz, 10G RMS), shock testing (100G, 6ms), EMI testing (DO-160 Section 21), and long-term reliability testing (1000+ hours at elevated temperature)"
-                ],
-                technologies: ["Altium Designer", "SPICE Simulation", "Thermal Analysis", "EMI/EMC Design", "IPC Standards", "Aerospace Components", "Power Electronics", "Signal Integrity", "Manufacturing DFM"],
-                challenges: "Primary design challenges included achieving high power density while maintaining thermal performance in a compact form factor, meeting stringent aerospace EMC requirements without compromising efficiency, ensuring reliable operation across extreme temperature ranges with minimal component derating, implementing comprehensive protection without adding excessive complexity, and optimizing the design for both performance and manufacturability at reasonable cost.",
-                impact: "This power distribution system has become the standard power solution for student rocketry avionics, enabling reliable operation of flight computers, sensors, and communication systems. The design has been successfully flight-tested in 25+ rocket flights with zero power-related failures. The modular approach has reduced integration time by 60% and improved system reliability, contributing to overall mission success rates exceeding 95%.",
-                timeline: "February 2024 - August 2024",
-                status: "Production Qualified - Flight Proven",
-                manufacturing: "Fabricated by Advanced Circuits (4-layer, HASL finish, IPC Class 3)",
-                testing: "Validated to MIL-STD-810 environmental standards",
-                flightHeritage: "25+ successful flights, 500+ operating hours",
-                documentation: "Complete design package including schematics, PCB layouts, assembly drawings, BOM, test procedures, and qualification reports",
-                certifications: "IPC-A-610 Class 3 compliant, RoHS compliant, REACH compliant"
-            }
-        };
-        };
-
-        // Project detail functions
-        function showProjectDetail(projectId) {
-            const project = projectData[projectId];
-            if (!project) return;
-
-            const modal = document.getElementById('project-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalContent = document.getElementById('modal-content');
-            
-            // Add loading state
-            modalContent.innerHTML = `
-                <div class="flex items-center justify-center py-20">
-                    <div class="loading-spinner"></div>
-                    <span class="ml-4 text-gray-600">Loading project details...</span>
-                </div>
-            `;
-            
-            modal.classList.remove('hidden');
-            modal.classList.add('modal-enter');
-            document.body.style.overflow = 'hidden';
-            
-            // Simulate loading delay for better UX
-            setTimeout(() => {
-
-            modalTitle.textContent = project.title;
-            
-            modalContent.innerHTML = `
-                <div class="space-y-8">
-                    <!-- Header -->
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="text-6xl">${project.icon}</div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-800 mb-2">${project.title}</h3>
-                            <div class="flex flex-wrap gap-2 text-sm text-gray-600 mb-2">
-                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">${project.timeline}</span>
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full">${project.status}</span>
-                                ${project.githubUrl ? `<a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full hover:bg-gray-200 transition-colors">GitHub</a>` : ''}
-                                ${project.demoUrl ? `<a href="${project.demoUrl}" target="_blank" rel="noopener noreferrer" class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full hover:bg-orange-200 transition-colors">Live Demo</a>` : ''}
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project Images -->
-                    ${project.images ? `
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-4">Project Gallery</h4>
-                        <div class="grid md:grid-cols-2 gap-4 mb-6">
-                            ${project.images.map(image => `
-                                <div class="bg-gray-50 rounded-lg overflow-hidden">
-                                    <img src="${image.url}" alt="${image.caption}" 
-                                         class="w-full h-48 object-cover"
-                                         onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
-                                    <div class="p-3">
-                                        <p class="text-sm text-gray-600">${image.caption}</p>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                    ` : ''}
-
-                    <!-- Overview -->
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-3">Project Overview</h4>
-                        <p class="text-gray-700 leading-relaxed">${project.overview}</p>
-                    </div>
-
-                    <!-- Technical Specifications -->
-                    ${project.technicalSpecs ? `
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-3">Technical Specifications</h4>
-                        <div class="bg-gray-50 rounded-lg p-4">
-                            <div class="grid md:grid-cols-2 gap-4">
-                                ${Object.entries(project.technicalSpecs).map(([key, value]) => `
-                                    <div class="flex justify-between items-start">
-                                        <span class="font-semibold text-gray-700 mr-2">${key}:</span>
-                                        <span class="text-gray-600 text-right">${value}</span>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    </div>
-                    ` : ''}
-
-                    <!-- Key Features -->
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-3">Key Features & Implementation</h4>
-                        <ul class="space-y-3">
-                            ${project.details.map(detail => `
-                                <li class="flex items-start gap-3">
-                                    <span class="text-purple-600 mt-1 font-bold">•</span>
-                                    <span class="text-gray-700 leading-relaxed">${detail}</span>
-                                </li>
-                            `).join('')}
-                        </ul>
-                    </div>
-
-                    <!-- Technologies -->
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-3">Technologies & Tools</h4>
-                        <div class="flex flex-wrap gap-2">
-                            ${project.technologies.map(tech => `
-                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">${tech}</span>
-                            `).join('')}
-                        </div>
-                    </div>
-
-                    <!-- Challenges -->
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-3">Technical Challenges & Solutions</h4>
-                        <p class="text-gray-700 leading-relaxed">${project.challenges}</p>
-                    </div>
-
-                    <!-- Impact -->
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-3">Project Impact & Results</h4>
-                        <p class="text-gray-700 leading-relaxed">${project.impact}</p>
-                    </div>
-
-                    <!-- Additional Information -->
-                    ${project.discoveries || project.publications || project.collaborations || project.userBase ? `
-                    <div class="grid md:grid-cols-2 gap-6">
-                        ${project.discoveries ? `
-                        <div>
-                            <h5 class="text-lg font-bold text-gray-800 mb-2">Discoveries</h5>
-                            <ul class="space-y-1">
-                                ${project.discoveries.map(discovery => `
-                                    <li class="text-gray-700 text-sm">• ${discovery}</li>
-                                `).join('')}
-                            </ul>
-                        </div>
-                        ` : ''}
-                        
-                        ${project.publications ? `
-                        <div>
-                            <h5 class="text-lg font-bold text-gray-800 mb-2">Publications</h5>
-                            <p class="text-gray-700 text-sm">${project.publications}</p>
-                        </div>
-                        ` : ''}
-                        
-                        ${project.collaborations ? `
-                        <div>
-                            <h5 class="text-lg font-bold text-gray-800 mb-2">Collaborations</h5>
-                            <p class="text-gray-700 text-sm">${project.collaborations}</p>
-                        </div>
-                        ` : ''}
-                        
-                        ${project.userBase ? `
-                        <div>
-                            <h5 class="text-lg font-bold text-gray-800 mb-2">Adoption</h5>
-                            <p class="text-gray-700 text-sm">${project.userBase}</p>
-                        </div>
-                        ` : ''}
-                    </div>
-                    ` : ''}
-
-                    <!-- Documentation -->
-                    ${project.documentation ? `
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-3">Documentation & Resources</h4>
-                        <p class="text-gray-700 leading-relaxed">${project.documentation}</p>
-                    </div>
-                    ` : ''}
-
-                    <!-- Action Buttons -->
-                    <div class="flex flex-wrap gap-4 pt-6 border-t border-gray-200">
-                        <button onclick="closeProjectDetail()" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
-                            Back to Projects
-                        </button>
-                        <a href="mailto:elonspacex2002@gmail.com?subject=Inquiry about ${project.title}" 
-                           class="border-2 border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-colors">
-                            Discuss This Project
-                        </a>
-                        ${project.githubUrl ? `
-                        <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer"
-                           class="bg-gray-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-900 transition-colors">
-                            View Source Code
-                        </a>
-                        ` : ''}
-                    </div>
-                </div>
-            `;
-            }, 500);
-        }
-
-        function closeProjectDetail() {
-            const modal = document.getElementById('project-modal');
-            modal.classList.add('modal-exit');
-            modal.classList.remove('modal-enter');
-            
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('modal-exit');
-                document.body.style.overflow = 'auto';
-            }, 300);
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('project-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeProjectDetail();
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeProjectDetail();
-            }
-        });
-
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f99ef975c917b7',t:'MTc2MzMyMzcxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+window.elementSdk.init({
+  defaultConfig,
+  onConfigChange: async (config) => { applyConfig(config); },
+  mapToCapabilities: (config) => ({
+    recolorables: [
+      { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+      { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+      { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+      { get: () => config.accent_color || defaultConfig.accent_color, set: (v) => { config.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); } },
+      { get: () => config.secondary_accent || defaultConfig.secondary_accent, set: (v) => { config.secondary_accent = v; window.elementSdk.setConfig({ secondary_accent: v }); } }
+    ],
+    borderables: [],
+    fontEditable: {
+      get: () => config.font_family || defaultConfig.font_family,
+      set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+    },
+    fontSizeable: {
+      get: () => config.font_size || defaultConfig.font_size,
+      set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+    }
+  }),
+  mapToEditPanelValues: (config) => new Map([
+    ['hero_name', config.hero_name || defaultConfig.hero_name],
+    ['hero_title', config.hero_title || defaultConfig.hero_title],
+    ['hero_tagline', config.hero_tagline || defaultConfig.hero_tagline],
+    ['about_text', config.about_text || defaultConfig.about_text],
+    ['contact_email', config.contact_email || defaultConfig.contact_email],
+    ['contact_linkedin', config.contact_linkedin || defaultConfig.contact_linkedin],
+    ['contact_github', config.contact_github || defaultConfig.contact_github]
+  ])
+});
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9eedfa64d7fb7f43',t:'MTc3NjYyMzQwMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
